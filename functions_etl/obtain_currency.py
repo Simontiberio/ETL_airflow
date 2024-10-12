@@ -9,6 +9,7 @@ from pathlib import Path
 
 def obtain_currency(api_key):
     url = "https://api.apilayer.com/exchangerates_data/latest"
+    
     params = { "symbols": "ARS",  
         "base": "USD" }
     headers = {
@@ -18,11 +19,11 @@ def obtain_currency(api_key):
     if response.status_code == 200:
         data = response.json()
         cotizacion_dolar = data['rates']['ARS']
-        print(f"Cotización actual del dólar: {cotizacion_dolar} ARS")
+        print(f"Current dolar rates: {cotizacion_dolar} ARS")
         registro = { 'date': data['date'] , 'price': data['rates']['ARS']}
         return registro
     else:
-        print(f"Error al obtener la cotización: {response.status_code}, {response.text}")
+        print(f"Error getting price: {response.status_code}, {response.text}")
 
 
 
@@ -31,7 +32,7 @@ def append_to_data_price(api_key : str, file : str):
     
     # Get the current record of the dollar price. To then host it as a dictionary, for example: {'date': '2024-10-10', 'price': 750}
 
-    registro = obtain_currency(api_key) 
+    record = obtain_currency(api_key) 
     
     base_dir = './base_datos/inventario/'
     base_path = Path(base_dir)
@@ -47,18 +48,18 @@ def append_to_data_price(api_key : str, file : str):
 
     # Check if the day's record is already in the DataFrame, to avoid duplicating records.
     
-    if registro['date'] in data_prices['date'].values:
-        print(f"El registro del día {registro['date']} ya existe. No se añadirá de nuevo.")
+    if record['date'] in data_prices['date'].values:
+        print(f"Record of day {record['date']} just exist. Not add again.")
         return data_prices
 
     # Convert the record to a DataFrame and add it to data_prices(file).
     
-    nuevo_registro = pd.DataFrame([registro])
-    data_prices = pd.concat([data_prices, nuevo_registro], ignore_index=True)
+    new_record = pd.DataFrame([record])
+    data_prices = pd.concat([data_prices, new_record], ignore_index=True)
 
     #Save the updated DataFrame to the CSV file.
     
     data_prices.to_csv(file_path, index=False)
-    print(f"Record of day {registro['date']} added successfully.")
+    print(f"Record of day {record['date']} added successfully.")
     
     return data_prices

@@ -17,9 +17,9 @@ try:
         print("Connection to Redshift successful!")
         result = connection.execute("SELECT current_date;")
         for row in result:
-            print("Fecha actual desde Redshift:", row[0])
+            print("update from Redshift:", row[0])
 except Exception as e:
-    print(f"Error al conectar con Redshift: {e}")
+    print(f"Error getting with Redshift conection: {e}")
 
 
 df_price = pd.read_csv('base_datos/data_price.csv')
