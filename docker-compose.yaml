@@ -79,6 +79,9 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/utils:/opt/airflow/utils
     - ${AIRFLOW_PROJ_DIR:-.}/functions_etl:/opt/airflow/functions_etl
+    - ${AIRFLOW_PROJ_DIR:-.}/base_datos:/opt/airflow/base_datos/inventario
+    - ${AIRFLOW_PROJ_DIR:-.}/base_datos:/opt/airflow/base_datos/ventas
+    #- ${AIRFLOW_PROJ_DIR:-.}/app:/opt/airflow/app
  
 
   user: "${AIRFLOW_UID:-50000}:0"
@@ -118,6 +121,7 @@ services:
       start_period: 30s
     restart: always
 
+  
   airflow-webserver:
     <<: *airflow-common
     command: webserver
