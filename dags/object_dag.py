@@ -1,6 +1,7 @@
-import sys
 import os
+import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 
 
 from airflow import DAG
@@ -13,6 +14,8 @@ from functions_etl.extract_file_sells_to_stock import extract_file_sells_to_stoc
 from functions_etl.update_stock import update_stock
 from functions_etl.data_transform import monetize_stock
 from functions_etl.load_data import load_data_to_Redshift
+
+
 
 # Define DAG.
 
@@ -37,6 +40,7 @@ with DAG (
     extract_task_API = PythonOperator( 
         task_id = 'extract_task_api',
         python_callable = append_to_data_price,
+        provide_context = True,
         op_kwargs= {'api_key': api_key , 'file' : data_quotes }
     )
 
@@ -45,6 +49,7 @@ with DAG (
     extract_data_sells_directory = PythonOperator( 
         task_id = 'extract_data_sells_directory',
         python_callable = extract_file_sells_to_stock,
+        provide_context = True,
         op_kwargs= {'file' : ventas_unidades }
     )
 
@@ -53,6 +58,7 @@ with DAG (
     extract_data_purchases_directory = PythonOperator( 
         task_id = 'extract_data_purchases_directory',
         python_callable = extract_file_purchases_to_stock,
+        provide_context = True,
         op_kwargs= {'file' : compras_stock}
     )
 
@@ -61,9 +67,10 @@ with DAG (
     transform_data_update_stock = PythonOperator( 
         task_id = 'stock_update',
         python_callable = update_stock,
-        op_kwargs= {'file' : stock_ferrimac,
-                    'file' : compras_stock,
-                    'file' : ventas_unidades,
+        provide_context = True,
+        op_kwargs= {'stock_file' : stock_ferrimac,
+                    'compras_file' : compras_stock,
+                    'ventas_file' : ventas_unidades,
                     'date' : '{{ ds }}' }
     )
 
@@ -72,8 +79,9 @@ with DAG (
     transform_data_monetize_stock = PythonOperator( 
         task_id = 'monetized_stock',
         python_callable = monetize_stock,
-        op_kwargs= {'file' : stock_ferrimac,
-                    'file' : data_quotes,
+        provide_context = True,
+        op_kwargs= {'stock_file' : stock_ferrimac,
+                    'quotes_file' : data_quotes,
                     'date' : '{{ ds }}' }
     )
 
@@ -83,6 +91,7 @@ with DAG (
     load_data_monetize_stock = PythonOperator( 
         task_id = 'load_data_into_Redshif',
         python_callable = load_data_to_Redshift,
+        provide_context = True,
         op_kwargs= {'file' : monetized_stock,
                     'redshift_table' : 'monetized_stock'
                  }
