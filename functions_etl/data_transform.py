@@ -7,7 +7,7 @@ from utils.config import list_prices_file, monetized_stock_file
 import pandas as pd
 from pathlib import Path
 
-def monetize_stock (stock_file: str, quotes_file: str, date: str):
+def monetize_stock (stock_file: str, data_quotes: str, date: str):
     # Define directory of files.
     
     base_dir = './base_datos/inventario'
@@ -17,7 +17,7 @@ def monetize_stock (stock_file: str, quotes_file: str, date: str):
     # Load paths.
     stock_path = base_path / stock_file
     list_prices_path = base_path / list_prices_file
-    quotes_path = base_path / quotes_file
+    quotes_path = base_path / data_quotes
     monetized_stock_path = base_path / monetized_stock_file
     
     # Verify if all necessary files exist.
@@ -33,7 +33,7 @@ def monetize_stock (stock_file: str, quotes_file: str, date: str):
         df_list_prices.columns = pd.to_datetime(df_list_prices.columns, errors='ignore', dayfirst=True)
         
         # Convert date to datetime format. 
-        date = pd.to_datetime(date)
+        date = pd.to_datetime(date, format='%Y-%m-%d')
         
         # Check if the date exists in df_quotes.
         if date in df_quotes['date'].values:

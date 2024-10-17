@@ -1,8 +1,9 @@
 import requests
 import os
 import pandas as pd
-from utils.config import api_key
+from utils.config import api_key, data_quotes
 from pathlib import Path
+
 
 
 # Function that allows us to obtain the dollar price, returning a dictionary with the rate and its date
@@ -28,15 +29,17 @@ def obtain_currency(api_key):
 
 
 
-def append_to_data_price(api_key : str, file : str):
+def append_to_data_price(api_key : str, data_quotes : str):
     
     # Get the current record of the dollar price. To then host it as a dictionary, for example: {'date': '2024-10-10', 'price': 750}
 
     record = obtain_currency(api_key) 
-    
-    base_dir = './base_datos/inventario/'
-    base_path = Path(base_dir)
-    file_path = base_path / file
+    print(record)
+
+   
+    #base_dir = './base_datos/inventario/'
+    #base_path = Path(base_dir)
+    file_path = f"./base_datos/inventario/{data_quotes}"
 
     # Check if the price file already exists, if not, create an empty DataFrame with the appropriate columns,
     #and then enter the values extracted by the API.

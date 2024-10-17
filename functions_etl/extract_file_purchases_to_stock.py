@@ -2,8 +2,9 @@ import os
 import shutil
 from datetime import datetime
 from pathlib import Path
+from utils.config import compras_file
 
-def extract_file_purchases_to_stock(file : str ):
+def extract_file_purchases_to_stock( file_compras : str ):
     # Define directory path.
     base_dir = './base_datos/'
     base_path = Path(base_dir)
@@ -20,16 +21,16 @@ def extract_file_purchases_to_stock(file : str ):
         return print(f"Directory  {destination_path} not found.")
 
     # Origin path define complete.
-    archivo_origen = origin_path.joinpath(file)
+    archivo_origen = origin_path.joinpath(file_compras)
     
     # Check if the file exists in the defined path.
     if archivo_origen.exists():
-        archivo_destino = destination_path.joinpath(file)
+        archivo_destino = destination_path.joinpath(file_compras)
 
         # Copy origin file to destination.
         
         shutil.copy(str(archivo_origen), str(archivo_destino))
-        print(f"File '{file}' moved to stock folder correctly.")
+        print(f"File '{file_compras}' moved to stock folder correctly.")
     else:
-        print(f"The file '{file}' was not found in the purchases directory.")
+        print(f"The file '{file_compras}' was not found in the purchases directory.")
 
