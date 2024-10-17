@@ -66,5 +66,17 @@ docker-compose up -d
 
 ## Estructura del Pipeline 
 
-![Diagrama del pipeline ETL](./utils/images/pipeline-image.png)
+El pipeline se estructura en 3 etapas o fases:
+
+# Extraccion de datos
+
+En esta etapa, se realiza la extracción y recoleccion de los datos. Esta compuesto por 3 tareas, las cuales se ejecutan en paralelo.
+
+ :one:```def append_to_data_price: ``` Se obtiene diariamente, mediante una 
+
+ :two:```def extract_file_sells_to_stock:```
+
+ :three:```def extract_file_purchases_to_stock:```
+
+
 
