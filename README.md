@@ -20,3 +20,10 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, encargadas de extraer 
 1- Clonar el repositorio 
 
 git clone git@github.com:Simontiberio/ETL_airflow.git
+
+Para ejecutar este script, puedes copiar el siguiente bloque de código:
+
+```bash
+# Comando para clonar el repositorio
+git clone https://github.com/usuario/proyecto.git
+python
