@@ -17,12 +17,53 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, encargadas de extraer 
 
 ## :desktop_computer: :gear: Pasos de Configuración 
 
-1- Clonar el repositorio 
-
-git clone git@github.com:Simontiberio/ETL_airflow.git
-
-Para ejecutar este script, puedes copiar el siguiente bloque de código:
+1- Clonar el repositorio.
 
 ```bash
 # Comando para clonar el repositorio
-git clone https://github.com/usuario/proyecto.git
+git clone git@github.com:Simontiberio/ETL_airflow.git
+
+```
+
+2- Crear un archivo .env con las configuraciones necesarias, incluyendo las credenciales de la API y las rutas de los archivos de ventas y compras.
+
+
+```bash
+# UID AIRFLOW.
+
+AIRFLOW_UID=1000
+
+# Credenciales Redshift.
+
+REDSHIFT_USER= '2024_nombre_apellido'
+REDSHIFT_PASSWORD='PASSWORD'
+REDSHIFT_DB= 'NOMBRE_DB'
+REDSHIFT_HOST='REDSHIFT_HOST'
+REDSHIFT_PORT= PORT
+
+# Variables de entorno.
+
+REDSHIFT_SCHEMA = 'REDSHIFT_SCHEMA'
+
+api_key = 'your_api_key'
+
+compras_file = 'compras.xlsx'
+stock_file = 'stock_ferrimac.xlsx'
+ventas_file = 'ventas_unidades.xlsx'
+monetized_stock_file = 'monetized_stock.xlsx'
+data_quotes = 'data_price.csv'
+list_prices_file = 'list_price_ferrimac.xlsx'
+
+```
+3- Iniciar los servicios de Airflow utilizando Docker Compose:
+
+```
+docker-compose up -d
+
+```
+
+4- Acceder a la interfaz de Airflow en http://localhost:8080 y activar el DAG llamado etl_update_stock_ferrimac.
+
+
+## Estructura del Pipeline 
+
