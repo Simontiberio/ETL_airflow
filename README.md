@@ -1,4 +1,4 @@
-# Proyecto ETL - Ferrimac
+# :rocket: Proyecto ETL - Ferrimac :rocket:
 
 ## Descripción del Proyecto
 
@@ -8,4 +8,7 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, encargadas de extraer 
 
 
 
--+
+
+## Requisitos
+
+
