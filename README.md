@@ -26,4 +26,3 @@ Para ejecutar este script, puedes copiar el siguiente bloque de código:
 ```bash
 # Comando para clonar el repositorio
 git clone https://github.com/usuario/proyecto.git
-python
