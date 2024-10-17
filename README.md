@@ -47,19 +47,18 @@ REDSHIFT_SCHEMA = 'REDSHIFT_SCHEMA'
 
 api_key = 'your_api_key'
 
-compras_file = 'compras.xlsx'
-stock_file = 'stock_ferrimac.xlsx'
-ventas_file = 'ventas_unidades.xlsx'
-monetized_stock_file = 'monetized_stock.xlsx'
-data_quotes = 'data_price.csv'
-list_prices_file = 'list_price_ferrimac.xlsx'
+compras_file = 'nombre_archivo.xlsx'
+stock_file = 'nombre_archivo.xlsx'
+ventas_file = 'nombre_archivo.xlsx'
+monetized_stock_file = 'nombre_archivo.xlsx'
+data_quotes = 'nombre_archivo.csv'
+list_prices_file = 'nombre_archivo.xlsx'
 
 ```
 3- Iniciar los servicios de Airflow utilizando Docker Compose:
 
 ```
 docker-compose up -d
-
 ```
 
 4- Acceder a la interfaz de Airflow en http://localhost:8080 y activar el DAG llamado etl_update_stock_ferrimac.
@@ -67,3 +66,4 @@ docker-compose up -d
 
 ## Estructura del Pipeline 
 
+![alt text](image.png)
