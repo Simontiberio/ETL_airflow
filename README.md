@@ -66,4 +66,4 @@ docker-compose up -d
 
 ## Estructura del Pipeline 
 
-![alt text](image.png)
+![Diagrama del pipeline ETL](./utils/pipeline-image.png)
