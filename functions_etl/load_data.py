@@ -5,7 +5,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 from pathlib import Path
-from utils.config import api_key, compras_stock,data_quotes,stock_ferrimac,ventas_unidades
+from utils.config import api_key, compras_file,data_quotes,stock_file,ventas_file, list_prices_file,monetized_stock_file
 
 
 def load_data(file: str):
@@ -62,7 +62,19 @@ def load_data(file: str):
     
     
 
-def load_data_to_Redshift (file : str, redshift_table : str ) :
+def load_data_to_Redshift (file : str) :
+
+
+    # Create dicc with diferents tables, and define a table to load in Redshift.
+
+    redshift_table = { stock_file : 'stock_ferrimac',
+                      ventas_file: 'ventas_unidades',
+                       list_prices_file : 'list_prices',
+                        monetized_stock_file : 'stock_monetized',
+                         data_quotes: 'data_quotes',
+                          compras_file : 'compras_stock' }
+
+    redshift_table = redshift_table [file]
 
     # Create URL to connect with SQLAlchemy
 
