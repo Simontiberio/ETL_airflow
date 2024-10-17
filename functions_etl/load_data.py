@@ -1,10 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
-from utils.config import REDSHIFT_HOST,REDSHIFT_DB,REDSHIFT_PORT,REDSHIFT_USER,REDSHIFT_PASSWORD 
+from utils.config import REDSHIFT_HOST,REDSHIFT_DB,REDSHIFT_PORT,REDSHIFT_USER,REDSHIFT_PASSWORD, REDSHIFT_SCHEMA 
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 from pathlib import Path
+from utils.config import api_key, compras_stock,data_quotes,stock_ferrimac,ventas_unidades
 
 
 def load_data(file: str):
@@ -35,7 +36,7 @@ def load_data(file: str):
             df = df.apply(lambda col: col.astype(str) if col.dtype == 'object' else col)
             file = Path(file).stem
             file_path = Path(f"./base_datos/inventario/{file}")
-            df = df.to_parquet(f"{file_path}.parquet", engine='pyarrow')
+            df.to_parquet(f"{file_path}.parquet", engine='pyarrow')
             print("File read as parquet")
             
         elif file_extension in ['.xls', '.xlsx']:
@@ -43,7 +44,7 @@ def load_data(file: str):
             df = df.apply(lambda col: col.astype(str) if col.dtype == 'object' else col)
             file = Path(file).stem
             file_path = Path(f"./base_datos/inventario/{file}")
-            df = df.to_parquet(f"{file_path}.parquet", engine='pyarrow')
+            df.to_parquet(f"{file_path}.parquet", engine='pyarrow')
             print("File read as parquet")
         else:
             print("File format not supported. Check if use as CSV or XLSX file.")
@@ -60,9 +61,6 @@ def load_data(file: str):
         return None
     
     
-
-
-
 
 def load_data_to_Redshift (file : str, redshift_table : str ) :
 
@@ -82,11 +80,11 @@ def load_data_to_Redshift (file : str, redshift_table : str ) :
     except Exception as e:
             print(f"Error getting with Redshift conection: {e}")
 
-    df = load_data(file)
+    load_data(file)
     file = Path(file).stem
     file_path = Path(f"./base_datos/inventario/{file}")
     df = pd.read_parquet(f"{file_path}.parquet")
    
-    df.to_sql(redshift_table, con=engine, schema= redshift_table, if_exists='append', index=False)
+    df.to_sql(redshift_table, con=engine, schema= REDSHIFT_SCHEMA, if_exists='append', index=False)
 
     print(f"File loaded into Redshift table {redshift_table}")
