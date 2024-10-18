@@ -1,6 +1,6 @@
 name: Run Tests
 
-# Especificamos que el workflow se ejecuta en cada push o pull request a la rama master
+
 on:
   push:
     branches:
@@ -20,13 +20,16 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.9'  # Puedes cambiar la versión de Python según lo que uses
+        python-version: '3.9'  
 
+      
     - name: Install dependencies
       run: |
+        cd test
         python -m pip install --upgrade pip
         pip install -r requirements.txt  # Asegúrate de tener tus dependencias aquí
 
     - name: Run unit tests
       run: |
-        pytest test/test_file.py  # Ejecuta tus tests en el archivo test_file.py
+        cd test
+        pytest run test_obtain_currency.py  
