@@ -1,4 +1,4 @@
-name: Run Tests with pytest
+name: Run Tests with pytest.
 
 
 on:
@@ -33,4 +33,4 @@ jobs:
       run: |
          export PYTHONPATH=$PYTHONPATH:$(pwd)
          cd test
-         pytest test_obtain_currency.py 
+         pytest test_obtain_currency.py test_load_data_file.py
