@@ -25,10 +25,10 @@ jobs:
       
     - name: Install dependencies
       run: |
-        cd test
+        
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Asegúrate de tener tus dependencias aquí
-
+        pip install -r requirements.txt  
+        
     - name: Run unit tests
       run: |
         cd test
