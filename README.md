@@ -13,6 +13,7 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, responsables de extrae
 ```bash
 
 ETL_AIRFLOW
+    ├── /.github/workflows                             #
     ├── /base_datos/                                   # Base de datos donde se almacenan archivos del negocio.
     ├── /config/                                       # Configuración de Airflow.
     ├── /dags/
@@ -29,11 +30,11 @@ ETL_AIRFLOW
     ├── /test/                                         # Directorio con pruebas unitarias.
     ├── /utils/
     │     ├── config.py                                # Archivo de configuración de variables de entorno.
-    ├── .env                                           # Archivo de configuración y definición de variables de entorno.
     ├── .gitignore                                     # Archivo de configuración de Git.
     ├── docker-compose.yml                             # Archivo de configuración de Docker Compose.
     ├── README.md                                      # Documentación del proyecto.
-    └── requirements.txt                               # Archivo con librerías utilizadas en el proyecto.
+    └── requirements.txt                               # Archivo con librerías utilizadas en el proyecto.                                   
+    
 ```
 
 
