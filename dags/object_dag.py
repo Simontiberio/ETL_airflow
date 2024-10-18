@@ -25,7 +25,7 @@ with DAG (
         'retries': 1,
     },
     description='ETL pipeline to extract,transform and load data into redshift',
-    schedule_interval= '@daily',
+    schedule_interval='0 22 * * 1-6',
     start_date= datetime(2024,1,1),
     catchup= False,
 ) as dag: 
@@ -45,7 +45,7 @@ with DAG (
     extract_data_sells_directory = PythonOperator( 
         task_id = 'extract_data_sells_directory',
         python_callable = extract_file_sells_to_stock,
-        op_kwargs= {'file' : ventas_file }
+        op_kwargs= {'file_ventas' : ventas_file }
     )
 
     # Task 3 : Extract data from purchases directory.
@@ -53,7 +53,7 @@ with DAG (
     extract_data_purchases_directory = PythonOperator( 
         task_id = 'extract_data_purchases_directory',
         python_callable = extract_file_purchases_to_stock,
-        op_kwargs= {'file' : compras_file}
+        op_kwargs= {'file_compras' : compras_file}
     )
 
     # Task 4 : Transform data, stock update from purchases and units sold.
@@ -61,9 +61,9 @@ with DAG (
     transform_data_update_stock = PythonOperator( 
         task_id = 'stock_update',
         python_callable = update_stock,
-        op_kwargs= {'stock_ferrimac' : stock_file,
-                    'compras_stock' : compras_file,
-                    'ventas_unidades' : ventas_file,
+        op_kwargs= {'stock_file' : stock_file,
+                    'compras_file' : compras_file,
+                    'ventas_file' : ventas_file,
                     'date' : '{{ ds }}' }
     )
 
@@ -72,8 +72,8 @@ with DAG (
     transform_data_monetize_stock = PythonOperator( 
         task_id = 'monetized_stock',
         python_callable = monetize_stock,
-        op_kwargs= {'file' : stock_file,
-                    'file' : data_quotes,
+        op_kwargs= {'stock_file' : stock_file,
+                    'data_quotes' : data_quotes,
                     'date' : '{{ ds }}' }
     )
 
