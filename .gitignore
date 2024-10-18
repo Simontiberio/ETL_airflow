@@ -1,7 +1,7 @@
 .env
 validation_functions.ipynb
 validation.ipynb
-logs/scheduler/latest/
+logs/
 plugins/
 base_datos/
 .ipynb_checkpoints
