@@ -9,30 +9,32 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, responsables de extrae
 
 ## Estructura del Proyecto 
 
-ETL_ARIFLORW
-    |   
-    ├──/base_datos/                                   # Base de datos donde se almancenan archivos del negocio.
-    ├──/config/                                       # Configuracion Airflow.
-    ├──/dags/
-    |     ├──/ etl_update_stock_ferrimac.py           # Archivo principal del DAG de Airflow.
-    ├──/logs/                                         # Carpeta donde persisten los logs de Airflow.
-    ├── functions_etl/
-    |       ├──/data_transform.py                     # Archivo que transforma los datos y valoriza el stock.
-    │       ├──/extract_file_purchases_to_stock.py    # Funcion que extrae datos del SD compras.                 
-    |       ├──/extract_file_sells_to_stock.py        # Funcion que extrae datos del SD ventas.
-    |       ├──/load_data.py                          # Funcion que carga los datos en Redshift.  
-    |       ├──/obtain_currency.py                    # Funcion que obtiene la cotizacion del dolar.
-    |       ├──/update_stock.py                       # Funcion que actualiza el stock en unidades
-    ├──/plugins/                                      # Directorio configuracion de Airflow.
-    ├──/test/                                         # Direcotrio con pruebas unitarias.
-    ├──/utils/
-          ├──config.py                                 # Archivo de configuracion de variables de entorno.
-    |
-    ├──.env                                            # Archivo configuracion y definicion de variables entorno.
-    ├──.gitignore                                      # Archivo configuracoin de git.
-    |── docker-compose.yml                             # Archivo de configuración de Docker Compose
-    ├── README.md                                     
-    └── requirements.txt                               # Archivo con librerias utilizas en el proyecto.
+
+```bash
+
+ETL_AIRFLOW
+    ├── /base_datos/                                   # Base de datos donde se almacenan archivos del negocio.
+    ├── /config/                                       # Configuración de Airflow.
+    ├── /dags/
+    │     ├── etl_update_stock_ferrimac.py             # Archivo principal del DAG de Airflow.
+    ├── /logs/                                         # Carpeta donde persisten los logs de Airflow.
+    ├── /functions_etl/
+    │     ├── data_transform.py                        # Archivo que transforma los datos y valoriza el stock.
+    │     ├── extract_file_purchases_to_stock.py       # Función que extrae datos del sistema de compras.
+    │     ├── extract_file_sells_to_stock.py           # Función que extrae datos del sistema de ventas.
+    │     ├── load_data.py                             # Función que carga los datos en Redshift.
+    │     ├── obtain_currency.py                       # Función que obtiene la cotización del dólar.
+    │     ├── update_stock.py                          # Función que actualiza el stock en unidades.
+    ├── /plugins/                                      # Directorio de configuración de Airflow.
+    ├── /test/                                         # Directorio con pruebas unitarias.
+    ├── /utils/
+    │     ├── config.py                                # Archivo de configuración de variables de entorno.
+    ├── .env                                           # Archivo de configuración y definición de variables de entorno.
+    ├── .gitignore                                     # Archivo de configuración de Git.
+    ├── docker-compose.yml                             # Archivo de configuración de Docker Compose.
+    ├── README.md                                      # Documentación del proyecto.
+    └── requirements.txt                               # Archivo con librerías utilizadas en el proyecto.
+```
 
 
 
@@ -86,7 +88,7 @@ list_prices_file = 'nombre_archivo.xlsx'
 ```
 3- Iniciar los servicios de Airflow utilizando Docker Compose:
 
-```
+```bash
 docker-compose up -d
 ```
 
@@ -125,6 +127,6 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 
 
 
-![Arquitectura y dependencias del Pipeline](./image.png)
+![Arquitectura y dependencias del Pipeline](image.png)
 
 
