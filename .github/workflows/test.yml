@@ -31,5 +31,6 @@ jobs:
 
     - name: Run unit tests
       run: |
+         export PYTHONPATH=$PYTHONPATH:$(pwd)
          cd test
          pytest test_obtain_currency.py 
