@@ -136,4 +136,4 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 
 A continuacion, se muestra como se modelo el subdomionio de mercaderias: 
 
-![Diagrama Entidad Relacion ](./DER-%20Ferrimac.png)
+![Diagrama Entidad Relacion ](./DER-Ferrimac.png)
