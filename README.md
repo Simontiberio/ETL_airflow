@@ -12,7 +12,15 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, encargadas de extraer 
 
 
 
-## :desktop_computer: :gear: Pasos de Configuración 
+## :desktop_computer: :gear: Pasos de Configuración.
+
+
+# :memo: Pre requisitos.
+
+:white_check_mark: **Python 3.8 o superior** 🐍
+:white_check_mark: **Apache Airflow** 🌬️
+:white_check_mark: **Docker y Docker Compose** 🐳
+
 
 1- Clonar el repositorio.
 
@@ -27,11 +35,9 @@ git clone git@github.com:Simontiberio/ETL_airflow.git
 
 ```bash
 # UID AIRFLOW.
-
 AIRFLOW_UID=1000
 
 # Credenciales Redshift.
-
 REDSHIFT_USER= '2024_nombre_apellido'
 REDSHIFT_PASSWORD='PASSWORD'
 REDSHIFT_DB= 'NOMBRE_DB'
@@ -39,11 +45,8 @@ REDSHIFT_HOST='REDSHIFT_HOST'
 REDSHIFT_PORT= PORT
 
 # Variables de entorno.
-
 REDSHIFT_SCHEMA = 'REDSHIFT_SCHEMA'
-
 api_key = 'your_api_key'
-
 compras_file = 'nombre_archivo.xlsx'
 stock_file = 'nombre_archivo.xlsx'
 ventas_file = 'nombre_archivo.xlsx'
@@ -93,7 +96,7 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 
 
 
-![Arquitectura y dependencias del Pipeline](images/arquitectura_pipeline.png)
+![Arquitectura y dependencias del Pipeline](image.png)
 
 
 
