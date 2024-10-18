@@ -6,3 +6,6 @@ plugins/
 base_datos/
 .ipynb_checkpoints
 .pytest_cache
+__pycache__
+config
+functions_testing_etl/

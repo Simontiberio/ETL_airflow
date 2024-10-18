@@ -1,0 +1,42 @@
+[2024-10-16T02:22:35.159+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-16T02:22:35.256+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.monetized_stock scheduled__2024-10-15T00:00:00+00:00 [queued]>
+[2024-10-16T02:22:35.321+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.monetized_stock scheduled__2024-10-15T00:00:00+00:00 [queued]>
+[2024-10-16T02:22:35.328+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2024-10-16T02:22:35.388+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): monetized_stock> on 2024-10-15 00:00:00+00:00
+[2024-10-16T02:22:35.430+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=121) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-16T02:22:35.435+0000] {standard_task_runner.py:72} INFO - Started process 127 to run task
+[2024-10-16T02:22:35.441+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'monetized_stock', 'scheduled__2024-10-15T00:00:00+00:00', '--job-id', '57', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmpdv6t45wx']
+[2024-10-16T02:22:35.449+0000] {standard_task_runner.py:105} INFO - Job 57: Subtask monetized_stock
+[2024-10-16T02:22:35.780+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.monetized_stock scheduled__2024-10-15T00:00:00+00:00 [running]> on host 2296928c39b5
+[2024-10-16T02:22:36.776+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='monetized_stock' AIRFLOW_CTX_EXECUTION_DATE='2024-10-15T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-15T00:00:00+00:00'
+[2024-10-16T02:22:36.787+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-16T02:22:36.859+0000] {logging_mixin.py:190} INFO - One or more files do not exist. Check the names and paths.
+[2024-10-16T02:22:36.862+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-10-16T02:22:36.904+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-16T02:22:36.906+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=etl_update_stock_ferrimac, task_id=monetized_stock, run_id=scheduled__2024-10-15T00:00:00+00:00, execution_date=20241015T000000, start_date=20241016T022235, end_date=20241016T022236
+[2024-10-16T02:22:37.028+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-10-16T02:22:37.093+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-10-16T02:22:37.100+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-16T03:38:15.397+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-16T03:38:15.476+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.monetized_stock scheduled__2024-10-15T00:00:00+00:00 [queued]>
+[2024-10-16T03:38:15.521+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.monetized_stock scheduled__2024-10-15T00:00:00+00:00 [queued]>
+[2024-10-16T03:38:15.536+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2024-10-16T03:38:15.607+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): monetized_stock> on 2024-10-15 00:00:00+00:00
+[2024-10-16T03:38:15.636+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=163) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-16T03:38:15.643+0000] {standard_task_runner.py:72} INFO - Started process 168 to run task
+[2024-10-16T03:38:15.658+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'monetized_stock', 'scheduled__2024-10-15T00:00:00+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmpguvdb841']
+[2024-10-16T03:38:15.668+0000] {standard_task_runner.py:105} INFO - Job 11: Subtask monetized_stock
+[2024-10-16T03:38:15.896+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.monetized_stock scheduled__2024-10-15T00:00:00+00:00 [running]> on host 1632cd2c9696
+[2024-10-16T03:38:16.743+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='monetized_stock' AIRFLOW_CTX_EXECUTION_DATE='2024-10-15T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-15T00:00:00+00:00'
+[2024-10-16T03:38:16.745+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-16T03:38:16.778+0000] {logging_mixin.py:190} INFO - One or more files do not exist. Check the names and paths.
+[2024-10-16T03:38:16.781+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-10-16T03:38:16.805+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-16T03:38:16.807+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=etl_update_stock_ferrimac, task_id=monetized_stock, run_id=scheduled__2024-10-15T00:00:00+00:00, execution_date=20241015T000000, start_date=20241016T033815, end_date=20241016T033816
+[2024-10-16T03:38:16.880+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-10-16T03:38:16.971+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-10-16T03:38:16.988+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
