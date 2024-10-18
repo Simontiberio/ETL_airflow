@@ -40,7 +40,6 @@ ETL_AIRFLOW
 
 ## :desktop_computer: :gear: Pasos de Configuración.
 
-
 ## :memo: Pre requisitos.
 
 :white_check_mark: *Python 3.8 o superior* 🐍
@@ -126,14 +125,14 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 ``` def load_data_to_Redshift ():``` Carga el archivo Parquet a la base de datos Redshift, ubicada en un cluster de AWS.
 
 
-# Representacion grafica del DAG y sus dependencias entre tareas.
+## Representacion grafica del DAG y sus dependencias entre tareas.
 
 
 ![Arquitectura y dependencias del Pipeline](./image.png)
 
 
 
-# Diagrama Entidad Relacion de Ferrimac
+## Diagrama Entidad Relacion de Ferrimac
 
 A continuacion, se muestra como se modelo el subdomionio de mercaderias: 
 
