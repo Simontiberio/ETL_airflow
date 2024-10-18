@@ -131,6 +131,7 @@ A continuación, se visualiza las secuencias y dependencias de las tareas que co
 :warning: El DAG se encuentra programado para que inicie a las 10 p.m de Lunes a Sabados, entendiendo que para esa hora ya culmino la jornada laboral (``` schedule_interval='0 22 * * 1-6'```).
 
 
+
 ![Arquitectura y dependencias del Pipeline](./image.png)
 
 
@@ -138,5 +139,7 @@ A continuación, se visualiza las secuencias y dependencias de las tareas que co
 ## Diagrama Entidad Relación de Ferrimac
 
 A continuacion, se muestra como se modelo el subdomionio de mercaderias: 
+
+
 
 ![Diagrama Entidad Relacion ](./DER-Ferrimac.png)
