@@ -2,3 +2,7 @@
 validation_functions.ipynb
 validation.ipynb
 logs/scheduler/latest/
+plugins/
+base_datos/
+.ipynb_checkpoints
+.pytest_cache
