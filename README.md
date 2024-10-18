@@ -2,20 +2,44 @@
 
 ## :memo: Descripción del Proyecto
 
-Este proyecto de ETL (Extract, Transform, Load) está diseñado para un caso de negocio,Ferretería **Ferrimac**. Utiliza Apache Airflow para automatizar y orquestar tareas de extracción, transformación y carga de datos provenientes de una API y de archivos locales. El objetivo es generar informacion de valor para su dueño, que del total de informacion de sistema, poder armar una vista del stock valorizado en pesos, calculando el valor de los productos en inventario según su precio en dólares y la cotización diaria del dólar.
+Este proyecto ETL (Extract, Transform, Load) está diseñado para Ferrimac, una ferretería que necesita optimizar la gestión de su stock. Utiliza Apache Airflow para automatizar el proceso de extracción, transformación y carga de datos desde una API y archivos locales. El objetivo principal es calcular y visualizar el stock valorizado en pesos, tomando en cuenta los productos en inventario, su precio en dólares y la cotización diaria del dólar.
 
-El pipeline incluye múltiples tareas (tasks) en Airflow, encargadas de extraer la información de ventas y compras, actualizar el stock, valorizarlo, y cargar los datos en una base de datos Redshift.
+El pipeline incluye múltiples tareas (tasks) en Airflow, responsables de extraer la información de ventas y compras, actualizar el stock y cargar los datos transformados en una base de datos Amazon Redshift.
 
 
 ## Estructura del Proyecto 
 
+ETL_ARIFLORW
+    |   
+    ├──/base_datos/                                   # Base de datos donde se almancenan archivos del negocio.
+    ├──/config/                                       # Configuracion Airflow.
+    ├──/dags/
+    |     ├──/ etl_update_stock_ferrimac.py           # Archivo principal del DAG de Airflow.
+    ├──/logs/                                         # Carpeta donde persisten los logs de Airflow.
+    ├── functions_etl/
+    |       ├──/data_transform.py                     # Archivo que transforma los datos y valoriza el stock.
+    │       ├──/extract_file_purchases_to_stock.py    # Funcion que extrae datos del SD compras.                 
+    |       ├──/extract_file_sells_to_stock.py        # Funcion que extrae datos del SD ventas.
+    |       ├──/load_data.py                          # Funcion que carga los datos en Redshift.  
+    |       ├──/obtain_currency.py                    # Funcion que obtiene la cotizacion del dolar.
+    |       ├──/update_stock.py                       # Funcion que actualiza el stock en unidades
+    ├──/plugins/                                      # Directorio configuracion de Airflow.
+    ├──/test/                                         # Direcotrio con pruebas unitarias.
+    ├──/utils/
+          ├──config.py                                 # Archivo de configuracion de variables de entorno.
+    |
+    ├──.env                                            # Archivo configuracion y definicion de variables entorno.
+    ├──.gitignore                                      # Archivo configuracoin de git.
+    |── docker-compose.yml                             # Archivo de configuración de Docker Compose
+    ├── README.md                                     
+    └── requirements.txt                               # Archivo con librerias utilizas en el proyecto.
 
 
 
 ## :desktop_computer: :gear: Pasos de Configuración.
 
 
-# :memo: Pre requisitos.
+## :memo: Pre requisitos.
 
 :white_check_mark: *Python 3.8 o superior* 🐍
 
@@ -102,8 +126,5 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 
 
 ![Arquitectura y dependencias del Pipeline](./image.png)
-
-
-
 
 
