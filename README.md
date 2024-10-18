@@ -23,9 +23,9 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, encargadas de extraer 
 :white_check_mark: *Apache Airflow* 🌬️
 
 
-:white_check_mark: *Docker y Docker Compose*
- 🐳
+:white_check_mark: *Docker y Docker Compose* 🐳
 
+# Pasos
 
 1- Clonar el repositorio.
 
@@ -101,7 +101,7 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 
 
 
-![Arquitectura y dependencias del Pipeline](./image.png)
+![Arquitectura y dependencias del Pipeline](/image.png)
 
 
 
