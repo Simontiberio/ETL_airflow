@@ -8,6 +8,10 @@ import pandas as pd
 from pathlib import Path
 
 def monetize_stock (stock_file: str, data_quotes: str, date: str):
+
+    '''This function takes the product stock files, and in combination with the price list 
+        and the quote of the day, it returns the stock of each product valued in local currency.'''
+    
     # Define directory of files.
     
     base_dir = './base_datos/inventario'

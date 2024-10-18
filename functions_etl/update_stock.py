@@ -3,6 +3,8 @@ from pathlib import Path
 
 def update_stock(stock_file: str, compras_file: str, ventas_file: str, date: str):
 
+    ''' Update the current stock with the units sold and enters for purchases. Return the updated stock.'''
+
     # Define directory of files.
     base_dir = './base_datos/inventario'
     base_path = Path(base_dir)

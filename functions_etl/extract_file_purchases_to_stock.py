@@ -5,6 +5,12 @@ from pathlib import Path
 from utils.config import compras_file
 
 def extract_file_purchases_to_stock( file_compras : str ):
+
+
+    '''Extract and move the purchases file to the inventory directory'''
+
+
+
     # Define directory path.
     base_dir = './base_datos/'
     base_path = Path(base_dir)

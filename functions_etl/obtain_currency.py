@@ -6,9 +6,12 @@ from pathlib import Path
 
 
 
-# Function that allows us to obtain the dollar price, returning a dictionary with the rate and its date
 
 def obtain_currency(api_key):
+
+    '''Function that allows us to obtain the dollar price, returning a dictionary with the rate and its date'''
+
+
     url = "https://api.apilayer.com/exchangerates_data/latest"
     
     params = { "symbols": "ARS",  
@@ -31,7 +34,8 @@ def obtain_currency(api_key):
 
 def append_to_data_price(api_key : str, data_quotes : str):
     
-    # Get the current record of the dollar price. To then host it as a dictionary, for example: {'date': '2024-10-10', 'price': 750}
+    ''' Get the current record of the dollar price. To then host it as a dictionary, 
+    for example: {'date': '2024-mm-dd', 'price': 965}. '''
 
     record = obtain_currency(api_key) 
     print(record)

@@ -10,8 +10,7 @@ from utils.config import api_key, compras_file,data_quotes,stock_file,ventas_fil
 
 def load_data(file: str):
 
-    '''It is a function that reads the file depending on its format, and stores it in a df. 
-    It is a function that is used in the load_data_to_redshift function to load said df as a table in the DB.'''
+    '''Reads the file and converts it to parquet format, returning a df'''
 
 
     # Get extesion file.
@@ -64,9 +63,10 @@ def load_data(file: str):
 
 def load_data_to_Redshift (file : str) :
 
+    '''Reads the parquet file, as output of the load data function, and loads it into the redshift database'''
+
 
     # Create dicc with diferents tables, and define a table to load in Redshift.
-
     redshift_table = { stock_file : 'stock_ferrimac',
                       ventas_file: 'ventas_unidades',
                        list_prices_file : 'list_prices',
