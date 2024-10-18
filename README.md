@@ -102,7 +102,7 @@ El pipeline de Airflow se compone de tres fases principales:
 
 En esta etapa, se recolectan los datos mediante tres tareas ejecutadas en paralelo:
 
-``` def append_to_data_price():```: Obtiene diariamente la cotización del dólar desde una API, actualizando un archivo histórico de cotizaciones.
+``` def append_to_data_price():``` Obtiene diariamente la cotización del dólar desde una API, actualizando un archivo histórico de cotizaciones.
 
 ``` def extract_file_sells_to_stock (): ``` Extrae las ventas diarias del sistema de ventas al cierre de cada jornada.
 
@@ -128,6 +128,7 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 ## Representacion gráfica del DAG y sus dependencias entre tareas.
 
 A continuación, se visualiza las secuencias y dependencias de las tareas que componen el DAG. 
+
 :warning: El DAG se encuentra programado para que inicie a las 10 p.m de Lunes a Sabados, entendiendo que para esa hora ya culmino la jornada laboral (``` schedule_interval='0 22 * * 1-6'```).
 
 
