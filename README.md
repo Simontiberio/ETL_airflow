@@ -10,9 +10,6 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, encargadas de extraer 
 ## Estructura del Proyecto 
 
 
-## Arquitectura del Pipeline ETL en Airflow
-
-
 
 
 ## :desktop_computer: :gear: Pasos de Configuración 
@@ -64,25 +61,39 @@ docker-compose up -d
 4- Acceder a la interfaz de Airflow en http://localhost:8080 y activar el DAG llamado etl_update_stock_ferrimac.
 
 
-## Estructura del Pipeline 
+### Estructura del Pipeline 
 
-El pipeline se estructura en 3 etapas o fases:
+El pipeline de Airflow se compone de tres fases principales:
 
-Extraccion de datos
+1. Extracción de Datos
 
-En esta etapa, se realiza la extracción y recoleccion de los datos. Esta compuesto por 3 tareas, las cuales se ejecutan en paralelo.
+En esta etapa, se recolectan los datos mediante tres tareas ejecutadas en paralelo:
 
- :one:```def append_to_data_price: ``` Se obtiene diariamente, mediante el uso de una API la cotizacion del dolar oficial. Una vez obtenido el precio de la fecha, actualiza el dataframe que almacena la historia de la divisa.
+``` def append_to_data_price():```: Obtiene diariamente la cotización del dólar desde una API, actualizando un archivo histórico de cotizaciones.
 
- :two:```def extract_file_sells_to_stock:```Recupera en forma diaria, del subdominio de ventas, las unidades vendidas del ultimo dia habil. Se obtiene la informacion al cierre del dia, incluyendo el movimiento de la jornada.
+``` def extract_file_sells_to_stock (): ``` Extrae las ventas diarias del sistema de ventas al cierre de cada jornada.
 
- :three:```def extract_file_purchases_to_stock:```Recupera en forma diaria, del subdominio de compras, las compras de mercaderia/productos realizadas a distintos proveedores. Actualiza aquellas compras que han sido conformadas y recepcionadas en inventario.Se obtiene la informacion al cierre de la jornada, incluyendo el movimiento del dia.
+``` def extract_file_purchases_to_stock ():``` Recupera las compras de productos a distintos proveedores, actualizando el inventario con las compras recepcionadas.
 
- Transformacion 
+2. Transformación de Datos
 
- En este paso, el pipeline realizara tareas de transformacion y calculo de los datos recolectados en la etapa anterior.
+Aquí se transforman los datos para calcular el valor del stock.
 
- :one:```def update_stock: ```A fin de poder valuar el stock de productos, tomamos como input el stock actual, unidades vendidas, las compras realizadas. La funcion update_stock, actualizara las unidades de stock, contemplando el movimiento del dia, es decir las unidades que se vendieron y los productos recibidos por las compras realizadas.
+``` def update_stock (): ```: Actualiza el stock diario considerando las ventas y compras registradas.
+
+``` def monetize_stock ():``` Valoriza el stock actualizado utilizando la última lista de precios en dólares y la cotización del día.
+
+3. Carga de Datos
+
+En esta última etapa, los datos son almacenados y cargados en Redshift.
+
+``` def load_data ():``` Convierte el stock valorizado a formato Parquet para un almacenamiento más eficiente.
+
+``` def load_data_to_Redshift ():``` Carga el archivo Parquet a la base de datos Redshift, ubicada en un cluster de AWS.
+
+
+
+![Arquitectura y dependencias del Pipeline](images/arquitectura_pipeline.png)
 
 
 
