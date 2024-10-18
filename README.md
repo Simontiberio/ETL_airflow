@@ -7,7 +7,7 @@ Este proyecto ETL (Extract, Transform, Load) está diseñado para Ferrimac, una 
 El pipeline incluye múltiples tareas (tasks) en Airflow, responsables de extraer la información de ventas y compras, actualizar el stock y cargar los datos transformados en una base de datos Amazon Redshift.
 
 
-## Estructura del Proyecto 
+## :file_folder: Estructura del Proyecto.
 
 
 ```bash
@@ -94,7 +94,7 @@ docker-compose up -d
 4- Acceder a la interfaz de Airflow en http://localhost:8080 y activar el DAG llamado etl_update_stock_ferrimac.
 
 
-## Estructura del Pipeline 
+## Estructura del Pipeline.
 
 El pipeline de Airflow se compone de tres fases principales:
 
@@ -125,14 +125,17 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 ``` def load_data_to_Redshift ():``` Carga el archivo Parquet a la base de datos Redshift, ubicada en un cluster de AWS.
 
 
-## Representacion grafica del DAG y sus dependencias entre tareas.
+## Representacion gráfica del DAG y sus dependencias entre tareas.
+
+A continuación, se visualiza las secuencias y dependencias de las tareas que componen el DAG. 
+:warning: El DAG se encuentra programado para que inicie a las 10 p.m de Lunes a Sabados, entendiendo que para esa hora ya culmino la jornada laboral (``` schedule_interval='0 22 * * 1-6'```).
 
 
 ![Arquitectura y dependencias del Pipeline](./image.png)
 
 
 
-## Diagrama Entidad Relacion de Ferrimac
+## Diagrama Entidad Relación de Ferrimac
 
 A continuacion, se muestra como se modelo el subdomionio de mercaderias: 
 
