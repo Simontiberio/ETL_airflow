@@ -25,7 +25,7 @@ El pipeline incluye múltiples tareas (tasks) en Airflow, encargadas de extraer 
 
 :white_check_mark: *Docker y Docker Compose* 🐳
 
-# Pasos
+## Pasos
 
 1- Clonar el repositorio.
 
@@ -69,11 +69,11 @@ docker-compose up -d
 4- Acceder a la interfaz de Airflow en http://localhost:8080 y activar el DAG llamado etl_update_stock_ferrimac.
 
 
-### Estructura del Pipeline 
+## Estructura del Pipeline 
 
 El pipeline de Airflow se compone de tres fases principales:
 
-1. Extracción de Datos
+:one: Extracción de Datos
 
 En esta etapa, se recolectan los datos mediante tres tareas ejecutadas en paralelo:
 
@@ -83,7 +83,7 @@ En esta etapa, se recolectan los datos mediante tres tareas ejecutadas en parale
 
 ``` def extract_file_purchases_to_stock ():``` Recupera las compras de productos a distintos proveedores, actualizando el inventario con las compras recepcionadas.
 
-2. Transformación de Datos
+:two: Transformación de Datos
 
 Aquí se transforman los datos para calcular el valor del stock.
 
@@ -91,7 +91,7 @@ Aquí se transforman los datos para calcular el valor del stock.
 
 ``` def monetize_stock ():``` Valoriza el stock actualizado utilizando la última lista de precios en dólares y la cotización del día.
 
-3. Carga de Datos
+:three: Carga de Datos
 
 En esta última etapa, los datos son almacenados y cargados en Redshift.
 
@@ -101,7 +101,7 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 
 
 
-![Arquitectura y dependencias del Pipeline](/image.png)
+![Arquitectura y dependencias del Pipeline](./image.png)
 
 
 
