@@ -127,6 +127,7 @@ En esta última etapa, los datos son almacenados y cargados en Redshift.
 
 
 
-![Arquitectura y dependencias del Pipeline](image.png)
+![Arquitectura y dependencias del Pipeline][def]
 
 
+[def]: image.png
