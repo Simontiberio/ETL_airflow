@@ -3,7 +3,6 @@ validation_functions.ipynb
 validation.ipynb
 logs/
 plugins/
-base_datos/
 .ipynb_checkpoints
 .pytest_cache
 __pycache__
