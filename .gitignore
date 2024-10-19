@@ -1,10 +1,7 @@
-.env
+
 validation_functions.ipynb
 validation.ipynb
-logs/
-plugins/
+
 .ipynb_checkpoints
-.pytest_cache
-__pycache__
-config
+
 functions_testing_etl/

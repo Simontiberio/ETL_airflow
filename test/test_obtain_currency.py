@@ -7,7 +7,7 @@ from utils.config import api_key
 
 
 
-# Mock simulates the result obtained from the API
+# Unit test validates if the dictionary with the expected fields is obtained.
 
 mock_response_api = {
     "rates": {"ARS": 989},

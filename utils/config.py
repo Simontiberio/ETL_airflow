@@ -25,3 +25,4 @@ stock_file = os.environ.get ('stock_file')
 data_quotes = os.environ.get ('data_quotes')
 monetized_stock_file = os.environ.get ('monetized_stock_file')
 list_prices_file = os.environ.get ('list_prices_file')
+

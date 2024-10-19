@@ -1,0 +1,666 @@
+[2024-10-19T00:07:02.131+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-19T00:07:02.246+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T00:07:02.329+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T00:07:02.331+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-19T00:07:02.458+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data_purchases_directory> on 2024-10-17 22:00:00+00:00
+[2024-10-19T00:07:02.517+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=80) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-19T00:07:02.547+0000] {standard_task_runner.py:72} INFO - Started process 102 to run task
+[2024-10-19T00:07:02.552+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_data_purchases_directory', 'scheduled__2024-10-17T22:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmppyqahy_z']
+[2024-10-19T00:07:02.570+0000] {standard_task_runner.py:105} INFO - Job 15: Subtask extract_data_purchases_directory
+[2024-10-19T00:07:02.926+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [running]> on host e1c12b7f12aa
+[2024-10-19T00:07:03.598+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_data_purchases_directory' AIRFLOW_CTX_EXECUTION_DATE='2024-10-17T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-17T22:00:00+00:00'
+[2024-10-19T00:07:03.608+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-19T00:07:03.811+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T00:07:03.852+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=extract_data_purchases_directory, run_id=scheduled__2024-10-17T22:00:00+00:00, execution_date=20241017T220000, start_date=20241019T000702, end_date=20241019T000703
+[2024-10-19T00:07:03.920+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-19T00:07:03.922+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 15 for task extract_data_purchases_directory ([Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'; 102)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T00:07:04.016+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-19T00:07:04.103+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-19T00:07:04.128+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-19T00:24:10.889+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-19T00:24:10.928+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T00:24:10.942+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T00:24:10.944+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-19T00:24:10.962+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data_purchases_directory> on 2024-10-17 22:00:00+00:00
+[2024-10-19T00:24:10.971+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=192) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-19T00:24:10.974+0000] {standard_task_runner.py:72} INFO - Started process 199 to run task
+[2024-10-19T00:24:10.975+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_data_purchases_directory', 'scheduled__2024-10-17T22:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmp5fpxnex0']
+[2024-10-19T00:24:10.978+0000] {standard_task_runner.py:105} INFO - Job 9: Subtask extract_data_purchases_directory
+[2024-10-19T00:24:11.041+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [running]> on host b81ea68088d8
+[2024-10-19T00:24:11.150+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_data_purchases_directory' AIRFLOW_CTX_EXECUTION_DATE='2024-10-17T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-17T22:00:00+00:00'
+[2024-10-19T00:24:11.152+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-19T00:24:11.464+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T00:24:11.490+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=extract_data_purchases_directory, run_id=scheduled__2024-10-17T22:00:00+00:00, execution_date=20241017T220000, start_date=20241019T002410, end_date=20241019T002411
+[2024-10-19T00:24:11.514+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-19T00:24:11.515+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 9 for task extract_data_purchases_directory ([Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'; 199)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T00:24:11.552+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-19T00:24:11.592+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-19T00:24:11.601+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-19T01:14:30.177+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-19T01:14:30.209+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T01:14:30.223+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T01:14:30.224+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-19T01:14:30.259+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data_purchases_directory> on 2024-10-17 22:00:00+00:00
+[2024-10-19T01:14:30.269+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=303) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-19T01:14:30.272+0000] {standard_task_runner.py:72} INFO - Started process 311 to run task
+[2024-10-19T01:14:30.271+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_data_purchases_directory', 'scheduled__2024-10-17T22:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmp4d6p9446']
+[2024-10-19T01:14:30.276+0000] {standard_task_runner.py:105} INFO - Job 9: Subtask extract_data_purchases_directory
+[2024-10-19T01:14:30.400+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [running]> on host e3c5f862816f
+[2024-10-19T01:14:30.589+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_data_purchases_directory' AIRFLOW_CTX_EXECUTION_DATE='2024-10-17T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-17T22:00:00+00:00'
+[2024-10-19T01:14:30.594+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-19T01:14:31.119+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T01:14:31.153+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=extract_data_purchases_directory, run_id=scheduled__2024-10-17T22:00:00+00:00, execution_date=20241017T220000, start_date=20241019T011430, end_date=20241019T011431
+[2024-10-19T01:14:31.191+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-19T01:14:31.192+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 9 for task extract_data_purchases_directory ([Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'; 311)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T01:14:31.266+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-19T01:14:31.318+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-19T01:14:31.327+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-19T02:27:43.207+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-19T02:27:43.227+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T02:27:43.236+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T02:27:43.237+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-19T02:27:43.252+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data_purchases_directory> on 2024-10-17 22:00:00+00:00
+[2024-10-19T02:27:43.261+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=175) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-19T02:27:43.264+0000] {standard_task_runner.py:72} INFO - Started process 180 to run task
+[2024-10-19T02:27:43.264+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_data_purchases_directory', 'scheduled__2024-10-17T22:00:00+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmpji7wjysj']
+[2024-10-19T02:27:43.267+0000] {standard_task_runner.py:105} INFO - Job 10: Subtask extract_data_purchases_directory
+[2024-10-19T02:27:43.318+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [running]> on host 80f723afa492
+[2024-10-19T02:27:43.404+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_data_purchases_directory' AIRFLOW_CTX_EXECUTION_DATE='2024-10-17T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-17T22:00:00+00:00'
+[2024-10-19T02:27:43.406+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-19T02:27:43.692+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T02:27:43.707+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=extract_data_purchases_directory, run_id=scheduled__2024-10-17T22:00:00+00:00, execution_date=20241017T220000, start_date=20241019T022743, end_date=20241019T022743
+[2024-10-19T02:27:43.719+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-19T02:27:43.721+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 10 for task extract_data_purchases_directory ([Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'; 180)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T02:27:43.762+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-19T02:27:43.787+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-19T02:27:43.791+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-19T03:26:58.380+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-19T03:26:58.408+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T03:26:58.687+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T03:26:58.688+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-19T03:26:58.719+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data_purchases_directory> on 2024-10-17 22:00:00+00:00
+[2024-10-19T03:26:58.730+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=179) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-19T03:26:58.735+0000] {standard_task_runner.py:72} INFO - Started process 195 to run task
+[2024-10-19T03:26:58.734+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_data_purchases_directory', 'scheduled__2024-10-17T22:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmpaxpxxoy8']
+[2024-10-19T03:26:58.740+0000] {standard_task_runner.py:105} INFO - Job 9: Subtask extract_data_purchases_directory
+[2024-10-19T03:26:58.821+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [running]> on host ce7ab86691ee
+[2024-10-19T03:26:58.937+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_data_purchases_directory' AIRFLOW_CTX_EXECUTION_DATE='2024-10-17T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-17T22:00:00+00:00'
+[2024-10-19T03:26:58.940+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-19T03:26:58.998+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T03:26:59.014+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=extract_data_purchases_directory, run_id=scheduled__2024-10-17T22:00:00+00:00, execution_date=20241017T220000, start_date=20241019T032658, end_date=20241019T032659
+[2024-10-19T03:26:59.029+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-19T03:26:59.030+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 9 for task extract_data_purchases_directory ([Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'; 195)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T03:26:59.073+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-19T03:26:59.107+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-19T03:26:59.113+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-19T05:02:41.693+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-19T05:02:41.849+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T05:02:42.010+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [queued]>
+[2024-10-19T05:02:42.019+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-19T05:02:42.202+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data_purchases_directory> on 2024-10-17 22:00:00+00:00
+[2024-10-19T05:02:42.354+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=400) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-19T05:02:42.433+0000] {standard_task_runner.py:72} INFO - Started process 416 to run task
+[2024-10-19T05:02:42.434+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_data_purchases_directory', 'scheduled__2024-10-17T22:00:00+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmpfjzi20u7']
+[2024-10-19T05:02:42.492+0000] {standard_task_runner.py:105} INFO - Job 11: Subtask extract_data_purchases_directory
+[2024-10-19T05:02:43.237+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory scheduled__2024-10-17T22:00:00+00:00 [running]> on host bfbd8d497269
+[2024-10-19T05:02:47.706+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_data_purchases_directory' AIRFLOW_CTX_EXECUTION_DATE='2024-10-17T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-17T22:00:00+00:00'
+[2024-10-19T05:02:47.711+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-19T05:02:47.940+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T05:02:48.115+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=extract_data_purchases_directory, run_id=scheduled__2024-10-17T22:00:00+00:00, execution_date=20241017T220000, start_date=20241019T050241, end_date=20241019T050248
+[2024-10-19T05:02:48.228+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-19T05:02:48.231+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 11 for task extract_data_purchases_directory ([Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'; 416)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/extract_file_purchases_to_stock.py", line 38, in extract_file_purchases_to_stock
+    shutil.copy(str(archivo_origen), str(archivo_destino))
+  File "/usr/local/lib/python3.12/shutil.py", line 436, in copy
+    copymode(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/lib/python3.12/shutil.py", line 317, in copymode
+    chmod_func(dst, stat.S_IMODE(st.st_mode))
+PermissionError: [Errno 1] Operation not permitted: 'base_datos/inventario/compras_stock.xlsx'
+[2024-10-19T05:02:48.403+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-19T05:02:48.593+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-19T05:02:48.621+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

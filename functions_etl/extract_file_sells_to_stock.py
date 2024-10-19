@@ -5,8 +5,11 @@ from pathlib import Path
 from utils.config import ventas_file
 
 def extract_file_sells_to_stock(file_ventas: str ):
+
+    '''Extract and move the sales file to the inventory directory'''
+
+
     # Define directory path.
-    
     base_dir = './base_datos/'
     base_path = Path(base_dir)
 
