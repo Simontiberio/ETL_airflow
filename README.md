@@ -103,27 +103,27 @@ El pipeline de Airflow se compone de tres fases principales:
 
 En esta etapa, se recolectan los datos mediante tres tareas ejecutadas en paralelo:
 
-``` def append_to_data_price():``` Obtiene diariamente la cotización del dólar desde una API, actualizando un archivo histórico de cotizaciones.
+``` append_to_data_price :``` Obtiene diariamente la cotización del dólar desde una API, actualizando un archivo histórico de cotizaciones.
 
-``` def extract_file_sells_to_stock (): ``` Extrae las ventas diarias del sistema de ventas al cierre de cada jornada.
+``` extract_file_sells_to_stock : ``` Extrae las ventas diarias del sistema de ventas al cierre de cada jornada.
 
-``` def extract_file_purchases_to_stock ():``` Recupera las compras de productos a distintos proveedores, actualizando el inventario con las compras recepcionadas.
+``` extract_file_purchases_to_stock :``` Recupera las compras de productos a distintos proveedores, actualizando el inventario con las compras recepcionadas.
 
 :two: Transformación de Datos
 
 Aquí se transforman los datos para calcular el valor del stock.
 
-``` def update_stock (): ```: Actualiza el stock diario considerando las ventas y compras registradas.
+``` update_stock : ```: Actualiza el stock diario considerando las ventas y compras registradas.
 
-``` def monetize_stock ():``` Valoriza el stock actualizado utilizando la última lista de precios en dólares y la cotización del día.
+``` monetize_stock :``` Valoriza el stock actualizado utilizando la última lista de precios en dólares y la cotización del día.
 
 :three: Carga de Datos
 
 En esta última etapa, los datos son almacenados y cargados en Redshift.
 
-``` def load_data ():``` Convierte el stock valorizado a formato Parquet para un almacenamiento más eficiente.
+``` load_data :``` Convierte el stock valorizado a formato Parquet para un almacenamiento más eficiente.
 
-``` def load_data_to_Redshift ():``` Carga el archivo Parquet a la base de datos Redshift, ubicada en un cluster de AWS.
+``` load_data_to_Redshift :``` Carga el archivo Parquet a la base de datos Redshift, ubicada en un cluster de AWS.
 
 
 ## Representacion gráfica del DAG y sus dependencias entre tareas.
@@ -145,3 +145,32 @@ A continuacion, se muestra como se modelo el subdomionio de mercaderias:
 
 
 ![Diagrama Entidad Relacion ](./DER-Ferrimac.png)
+
+
+## 🗂️ Descripción del Modelo de Datos. 📝 
+
+Este modelo de datos soporta la valorización y gestión de inventarios mediante el almacenamiento de información clave sobre productos, proveedores y registros diarios de actividades (ventas, compras y valorización de stock). La estructura de las tablas facilita un análisis detallado y diario de cada aspecto de la gestión de inventarios.
+
+Columnas de Producto y Proveedor:
+
+Las primeras cinco columnas (id_product, model, descripcion, suppliers, y blands) contienen información descriptiva y de identificación del producto, así como detalles del proveedor y marca.
+
+Campos de Fecha (date-xx):
+
+Cada columna con un formato de fecha (por ejemplo, 2024-19-09) representa un snapshot diario de las operaciones, manteniendo un registro detallado de las actividades de cada día del mes.
+Granularidad: Estas columnas de fecha representan valores diarios, con un snapshot diario de cada variable (como stock, unidades vendidas y compras). Esto permite analizar las variaciones diarias del inventario y calcular el valor del stock en función de los movimientos de venta y compra, y la cotización diaria del dólar.
+Propósito de las fechas: Al incluir una columna por cada día del mes, es posible observar el comportamiento y cambios en el stock en un intervalo de tiempo específico, facilitando tanto la consulta histórica como el análisis de tendencias y la valorización precisa.
+
+
+## 🛠️ Áreas de Mejora  🔧 
+
+Para continuar evolucionando y mejorando el pipeline de datos desarrollado para Ferrimac, se identifican las siguientes oportunidades de mejora, que pueden brindar un valor agregado y permitir una gestión más eficiente de las operaciones del negocio:
+
+:one: Modelos Predictivos para anticiparse al comportamiento de las variables del negocio: 
+La implementación de modelos de machine learning que permitan predecir la volatilidad del tipo de cambio beneficiaría la toma de decisiones financieras y de compra de inventario. Con estas proyecciones, Ferrimac podría optimizar sus compras y reducir riesgos asociados a fluctuaciones en la divisa, mejorando la precisión en la valorización de su stock y en la planificación de costos.  Lo mismo aplica para las predicciones de los picos de demanda. Esto permitiría a Ferrimac planificar inventarios y asegurar disponibilidad de productos en momentos clave, optimizando la cadena de suministro y reduciendo costos de oportunidad asociados a la falta de stock.
+
+
+:two: Desarrollo de Interfaces Gráficas para la Visualización de Datos
+Incorporar interfaces gráficas permitiría a Ferrimac visualizar de manera intuitiva y en tiempo real la información clave sobre las variaciones del tipo de cambio y la valorización del stock. Estas visualizaciones facilitarían la identificación de tendencias y patrones de forma rápida y accesible, permitiendo al equipo tomar decisiones informadas y en tiempo adecuado. Además, una representación visual de los datos aumentaría la transparencia y comprensión de la evolución del negocio, mejorando la comunicación y el análisis estratégico.
+
+Estas áreas de mejora proporcionarían una visión integral de los datos, convirtiéndolos en un activo estratégico que no solo gestione el presente, sino que también permita a Ferrimac prepararse para el futuro, anticipando riesgos y capitalizando oportunidades de manera más eficiente.
