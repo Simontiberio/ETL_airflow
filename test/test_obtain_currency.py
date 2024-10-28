@@ -22,5 +22,6 @@ def test_obtain_currency(mock_get):
     mock_get.return_value.json.return_value = mock_response_api
 
     result = obtain_currency(api_key)
+    expected = {'date': '2024-10-15', 'price': 989}
 
-    assert result == {'date': '2024-10-15', 'price': 989}, "Result not expected"
+    assert result == expected , "Result not expected"
