@@ -3,10 +3,24 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 from utils.config import ventas_file
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def extract_file_sells_to_stock(file_ventas: str ):
 
-    '''Extract and move the sales file to the inventory directory'''
+    """
+    Extracts and moves the specified sales file to the inventory directory.
+    
+    Args:
+        file_ventas (str): Name of the sales file to move.
+        
+    Logs:
+        - Errors if the source or destination directories do not exist.
+        - Information confirming the successful move of the file.
+        - Warnings if the specified file does not exist in the source directory.
+    """
 
 
     # Define directory path.
@@ -20,12 +34,13 @@ def extract_file_sells_to_stock(file_ventas: str ):
 
     # Verified if exist origin and destination paths.
     if not origin_path.exists():
-        print(f"Directory {origin_path} not exist.")
-        return
-    if not destination_path.exists():
-        print(f" Directory {destination_path} not exist.")
+        logging.error(f"Directory {origin_path} does not exist.")
         return
 
+    if not destination_path.exists():
+        logging.error(f"Directory {destination_path} does not exist.")
+        return
+       
    # Origin path define complete.
 
     archivo_origen = origin_path.joinpath(file_ventas)
@@ -36,6 +51,8 @@ def extract_file_sells_to_stock(file_ventas: str ):
 
         # Copy origin file to destination.
         shutil.copy(str(archivo_origen), str(archivo_destino))
-        print(f"File '{file_ventas}' moved to stock folder correctly.")
+        logging.info(f"File '{file_ventas}' moved to stock folder successfully.")
+        
     else:
-        print(f"The file '{file_ventas}' was not found in the sells directory.")
+        logging.warning(f"The file '{file_ventas}' was not found in the sales directory.")
+        
