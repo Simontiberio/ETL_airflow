@@ -2,15 +2,29 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 from utils.config import REDSHIFT_HOST,REDSHIFT_DB,REDSHIFT_PORT,REDSHIFT_USER,REDSHIFT_PASSWORD, REDSHIFT_SCHEMA 
 import pandas as pd
-from sqlalchemy import create_engine
-from sqlalchemy.engine import Engine
 from pathlib import Path
-from utils.config import api_key, compras_file,data_quotes,stock_file,ventas_file, list_prices_file,monetized_stock_file
+import logging
+from utils.config import compras_file,data_quotes,stock_file,ventas_file, list_prices_file,monetized_stock_file
 
+# Configure logging.
+logging.basicConfig(level=logging.INFO)
 
 def load_data(file: str):
 
-    '''Reads the file and converts it to parquet format, returning a DataFrame.'''
+    """
+    Reads the specified file (CSV or Excel) and converts it to Parquet format, returning a DataFrame.
+
+    Args:
+        file (str): The name of the file to be read. Must be a CSV or XLSX file.
+
+    Returns:
+         The content of the file as a DataFrame, or None if an error occurs.
+    
+    Raises:
+        FileNotFoundError: If the specified file does not exist.
+        ValueError: If the file is empty or has an unsupported format.
+        RuntimeError: If an error occurs during file reading or conversion.
+    """
 
     # Get extension of the file.
     file_extension = Path(file).suffix.lower()
@@ -34,7 +48,7 @@ def load_data(file: str):
             # Define parquet file path
             parquet_file_path = file_path.with_suffix('.parquet')
             df.to_parquet(parquet_file_path, engine='pyarrow')
-            print("File read as parquet")
+            logging.info("CSV file read and converted to Parquet")
             
         elif file_extension in ['.xls', '.xlsx']:
             df = pd.read_excel(file_path, engine='openpyxl')
@@ -43,7 +57,7 @@ def load_data(file: str):
             # Define parquet file path
             parquet_file_path = file_path.with_suffix('.parquet')
             df.to_parquet(parquet_file_path, engine='pyarrow')
-            print("File read as parquet")
+            logging.info("Excel file read and converted to Parquet")
         else:
             raise ValueError("File format not supported. Use CSV or XLSX files.")
     
@@ -64,7 +78,16 @@ def load_data(file: str):
 
 def load_data_to_Redshift(file: str):
     
-    '''Reads the parquet file, as output of the load_data function, and loads it into the Redshift database.'''
+    """
+    Reads the specified Parquet file, converts it to a DataFrame, and loads it into the Redshift database.
+
+    Args:
+        file (str): The name of the Parquet file (without the extension) to load into Redshift.
+
+    Raises:
+        RuntimeError: If there is an error connecting to Redshift, if the DataFrame is empty, or if there is an error loading data into Redshift.
+        KeyError: If the file name does not match any table in the redshift_tables dictionary.
+    """
 
     # Create a dictionary with different tables, and define a table to load in Redshift.
     redshift_tables = {
@@ -76,6 +99,9 @@ def load_data_to_Redshift(file: str):
         compras_file : 'compras_stock'
     }
 
+    if file not in redshift_tables:
+        raise KeyError(f"The file '{file}' does not match any known Redshift table names.")
+    
     redshift_table = redshift_tables[file]
    
     # Create URL to connect with SQLAlchemy
@@ -87,10 +113,10 @@ def load_data_to_Redshift(file: str):
     # Establish connection to Redshift
     try:
         with engine.connect() as connection:
-            print("Connection to Redshift successful!")
+            logging.info("Connection to Redshift successful.")
             result = connection.execute("SELECT current_date;")
             for row in result:
-                print("Update from Redshift:", row[0])
+                logging.info(f"Update from Redshift: {row[0]}")
     except Exception as e:
         raise RuntimeError(f"Error connecting to Redshift: {e}")
 
@@ -105,6 +131,6 @@ def load_data_to_Redshift(file: str):
     try:
         # Load DataFrame into Redshift table
         df.to_sql(redshift_table, con=engine, schema=REDSHIFT_SCHEMA, if_exists='append', index=False)
-        print(f"File loaded into Redshift table '{redshift_table}' successfully.")
+        logging.info(f"File '{file}' successfully loaded into Redshift table '{redshift_table}'.")
     except Exception as e:
         raise RuntimeError(f"Error loading data into Redshift table '{redshift_table}': {e}")
