@@ -95,6 +95,19 @@ docker-compose up -d
 4- Acceder a la interfaz de Airflow en http://localhost:8080 y activar el DAG llamado etl_update_stock_ferrimac.
 
 
+5- Credenciales de acceso
+
+Usuario: airflow
+Contraseña: airflow
+
+Nota: Asegúrate de que estas credenciales coincidan con las configuradas en tu archivo docker-compose.yml, si las has cambiado.
+
+6- Activar el DAG
+
+Después de iniciar sesión, activa el DAG llamado etl_update_stock_ferrimac para comenzar el proceso de ETL. Puedes encontrarlo en la lista de DAGs en la interfaz principal.
+
+
+
 ## Estructura del Pipeline.
 
 El pipeline de Airflow se compone de tres fases principales:
@@ -160,6 +173,48 @@ Campos de Fecha (date-xx):
 Cada columna con un formato de fecha (por ejemplo, 2024-19-09) representa un snapshot diario de las operaciones, manteniendo un registro detallado de las actividades de cada día del mes.
 Granularidad: Estas columnas de fecha representan valores diarios, con un snapshot diario de cada variable (como stock, unidades vendidas y compras). Esto permite analizar las variaciones diarias del inventario y calcular el valor del stock en función de los movimientos de venta y compra, y la cotización diaria del dólar.
 Propósito de las fechas: Al incluir una columna por cada día del mes, es posible observar el comportamiento y cambios en el stock en un intervalo de tiempo específico, facilitando tanto la consulta histórica como el análisis de tendencias y la valorización precisa.
+
+
+### ⚙️ Pruebas Unitarias
+
+Este proyecto cuenta con un conjunto de pruebas unitarias implementadas con la biblioteca `pytest`. Estas pruebas permiten verificar el correcto funcionamiento de funciones clave, asegurando que los datos se carguen y transformen adecuadamente y que la conexión con la API se realice de forma correcta. Ejecutar las pruebas de manera regular ayuda a detectar posibles errores o cambios en el comportamiento esperado, mejorando así la calidad y la confiabilidad del código.
+
+#### 🔍 Funcionalidad de las Pruebas Actuales
+
+1. **📄 Prueba de carga de datos** (`test_load_data_xlsx`): Valida si el archivo se carga correctamente en formato Excel, convirtiéndolo en un archivo parquet con la estructura y ubicación esperada.
+2. **💱 Prueba de obtención de cotizacion del dolar** (`test_obtain_currency`): Comprueba si se obtiene el diccionario con los datos correctos desde una API externa, validando la respuesta y estructura esperada.
+
+#### 📋 Requisitos Previos
+
+Para ejecutar las pruebas unitarias, asegurarse de que `pytest` esté instalado. Si no lo tienes, puedes instalarlo con:
+
+```bash
+pip install pytest
+```
+
+### 🚀 Instrucciones para Ejecutar las Pruebas
+
+ 1- Dirígete al directorio raíz del proyecto:
+
+```bash
+cd etl_airflow/test/
+```
+
+ 2- Ejecuta todas las pruebas unitarias usando el comando:
+
+```bash
+pytest test_load_data_file.py
+```
+
+```bash
+pytest obtain_currency.py
+```
+
+3- Si deseas ver detalles de cada prueba (modo detallado), ejecuta:
+
+```bash
+pytest -v test_load_data_file.py
+```
 
 
 ## 🛠️ Áreas de Mejora  🔧 
