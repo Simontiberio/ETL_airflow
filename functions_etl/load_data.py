@@ -12,10 +12,10 @@ logging.basicConfig(level=logging.INFO)
 def load_data(file: str):
 
     """
-    Reads the specified file (CSV or Excel) and converts it to Parquet format, returning a DataFrame.
+    Reads the specified file (CSV or Excel format) and converts it to Parquet format, returning a DataFrame.
 
     Args:
-        file (str): The name of the file to be read. Must be a CSV or XLSX file.
+        file: The name of the file to be read. Must be a CSV or XLSX file.
 
     Returns:
          The content of the file as a DataFrame, or None if an error occurs.
@@ -121,7 +121,9 @@ def load_data_to_Redshift(file: str):
         raise RuntimeError(f"Error connecting to Redshift: {e}")
 
     # Load data from parquet file
-    df = load_data(file)  # Ensure load_data has error handling
+    df = load_data(file)  
+    
+    # Ensure load_data has error handling
     if df is None:
         raise RuntimeError("DataFrame is empty. Check if the parquet file was loaded correctly.")
 

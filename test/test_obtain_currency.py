@@ -2,7 +2,7 @@ import pytest
 import requests
 import pandas as pd
 from unittest.mock import patch
-from functions_etl.obtain_currency import obtain_currency, append_to_data_price
+from functions_etl.obtain_currency import obtain_currency
 from utils.config import api_key
 from datetime import datetime
 
@@ -17,6 +17,15 @@ mock_response_api = {
 
 @patch('requests.get')
 def test_obtain_currency(mock_get):
+
+    """
+    Tests the obtain_currency function to ensure it retrieves and returns 
+    the correct currency data from an external API.
+
+    Args:
+        mock_get (MagicMock): Mock of the requests.get function to simulate the 
+                              API call and return a pre-defined JSON response.
+    """
 
 
     mock_get.return_value.status_code = 200

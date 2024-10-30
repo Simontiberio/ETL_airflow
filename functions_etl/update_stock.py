@@ -7,18 +7,18 @@ from typing import Union
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def update_stock(stock_file: str, compras_file: str, ventas_file: str, date: Union[str, pd.Timestamp]) -> None:
+def update_stock(stock_file: str, compras_file: str, ventas_file: str, date: Union[str, pd.Timestamp]):
     """
     Updates the current stock with units sold and purchase entries.
     
     Args:
-        stock_file (str): Name of the stock file.
-        compras_file (str): Name of the purchases file.
-        ventas_file (str): Name of the sales file.
-        date (Union[str, pd.Timestamp]): Date for the stock update in 'YYYY-MM-DD' format.
+        stock_file: Name of the stock file.
+        compras_file: Name of the purchases file.
+        ventas_file: Name of the sales file.
+        date: Date for the stock update in 'YYYY-MM-DD' format.
     
     Returns:
-        None: Saves the updated stock file in the base directory.
+         Saves (updated) the updated stock file in the base directory.
     
     Logs:
         Information and errors regarding file existence, date formats, and updates.

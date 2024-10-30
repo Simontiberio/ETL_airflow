@@ -13,6 +13,17 @@ from pathlib import Path
 @patch('functions_etl.load_data.pd.read_excel')
 @patch('functions_etl.load_data.pd.DataFrame.to_parquet')
 def test_load_data_xlsx(mock_to_parquet, mock_read_excel, mock_exists):
+
+    """
+        Tests the load_data function to verify that an .xlsx file is loaded 
+        and correctly transformed into a parquet file.
+
+           
+        Args:
+        mock_to_parquet (MagicMock): Mock of the to_parquet function to simulate saving in parquet format.
+        mock_read_excel (MagicMock): Mock of the read_excel function to simulate reading the Excel file.
+        mock_exists (MagicMock): Mock of the Path.exists function to simulate the existence of the Excel file.
+    """
     # Mock DataFrame to return.
     mock_df = pd.DataFrame({'colA': ['1', '2'], 'colB': ['3', '4']})
     mock_read_excel.return_value = mock_df

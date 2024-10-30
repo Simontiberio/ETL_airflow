@@ -17,7 +17,7 @@ def obtain_currency(api_key):
     Fetches the current USD to ARS exchange rate, returning a dictionary with the rate and date.
     
     Args:
-        api_key (str): API key for authenticating the request to the exchange rate service.
+        api_key: API key for authenticating the request to the exchange rate service.
     
     Returns:
         Dictionary containing the date and exchange rate if successful, or None on failure.
@@ -57,14 +57,14 @@ def append_to_data_price(api_key : str, data_quotes : str):
     
     """
     Retrieves the current dollar price record from an API and appends it to a CSV file. 
-    The record is structured as a dictionary, e.g., {'date': '2024-mm-dd', 'price': 965}.
+    The record is structured as a dictionary.
     
     Args:
-        api_key (str): API key used to authenticate and obtain currency data.
-        data_quotes (str): Name of the CSV file where data is stored.
+        api_key: API key used to authenticate and obtain currency data.
+        data_quotes: Name of the CSV file where data is stored.
         
     Returns:
-        pd.DataFrame: Updated DataFrame containing all records, including the newly appended one if applicable.
+        DataFrame: Updated DataFrame containing all records, including the newly appended one if applicable.
         
     Logs:
         - Information about existing records.
