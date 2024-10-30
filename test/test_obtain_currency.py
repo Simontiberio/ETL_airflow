@@ -18,6 +18,15 @@ mock_response_api = {
 @patch('requests.get')
 def test_obtain_currency(mock_get):
 
+    """
+    Tests the obtain_currency function to ensure it retrieves and returns 
+    the correct currency data from an external API.
+
+    Args:
+        mock_get (MagicMock): Mock of the requests.get function to simulate the 
+                              API call and return a pre-defined JSON response.
+    """
+
 
     mock_get.return_value.status_code = 200
     mock_get.return_value.json.return_value = mock_response_api
