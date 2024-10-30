@@ -2,7 +2,7 @@ import pytest
 import requests
 import pandas as pd
 from unittest.mock import patch
-from functions_etl.obtain_currency import obtain_currency, append_to_data_price
+from functions_etl.obtain_currency import obtain_currency
 from utils.config import api_key
 from datetime import datetime
 
