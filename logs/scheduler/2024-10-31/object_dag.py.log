@@ -47,3 +47,101 @@
 [2024-10-31T01:05:09.753+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:05:09.753+0000] {dag.py:3229} INFO - Sync 1 DAGs
 [2024-10-31T01:05:09.779+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:05:09.779+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
 [2024-10-31T01:05:09.807+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.297 seconds
+[2024-10-31T01:05:39.923+0000] {processor.py:186} INFO - Started process (PID=2626) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:05:39.925+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:05:39.929+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:05:39.928+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:05:40.179+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:05:40.210+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:05:40.210+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:05:40.234+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:05:40.234+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:05:40.265+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.350 seconds
+[2024-10-31T01:06:10.624+0000] {processor.py:186} INFO - Started process (PID=2633) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:06:10.626+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:06:10.629+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:06:10.629+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:06:10.702+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:06:10.730+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:06:10.730+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:06:10.763+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:06:10.763+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:06:10.800+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.184 seconds
+[2024-10-31T01:06:41.090+0000] {processor.py:186} INFO - Started process (PID=2640) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:06:41.092+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:06:41.095+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:06:41.094+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:06:41.180+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:06:41.217+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:06:41.217+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:06:41.268+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:06:41.268+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:06:41.300+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.216 seconds
+[2024-10-31T01:07:11.607+0000] {processor.py:186} INFO - Started process (PID=2647) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:07:11.609+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:07:11.614+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:07:11.613+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:07:11.791+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:07:11.823+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:07:11.823+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:07:11.858+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:07:11.858+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:07:11.893+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.294 seconds
+[2024-10-31T01:07:42.150+0000] {processor.py:186} INFO - Started process (PID=2654) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:07:42.152+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:07:42.156+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:07:42.155+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:07:42.382+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:07:42.412+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:07:42.412+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:07:42.437+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:07:42.436+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:07:42.462+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.316 seconds
+[2024-10-31T01:08:12.664+0000] {processor.py:186} INFO - Started process (PID=2662) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:08:12.665+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:08:12.669+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:08:12.669+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:08:12.884+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:08:12.917+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:08:12.916+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:08:12.946+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:08:12.946+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:08:12.981+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.325 seconds
+[2024-10-31T01:08:43.278+0000] {processor.py:186} INFO - Started process (PID=2669) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:08:43.280+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:08:43.284+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:08:43.284+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:08:43.505+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:08:43.552+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:08:43.552+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:08:43.583+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:08:43.583+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:08:43.613+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.341 seconds
+[2024-10-31T01:09:13.772+0000] {processor.py:186} INFO - Started process (PID=2676) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:09:13.775+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:09:13.779+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:09:13.779+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:09:14.000+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:09:14.043+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:09:14.043+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:09:14.084+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:09:14.083+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:09:14.122+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.362 seconds
+[2024-10-31T01:09:44.622+0000] {processor.py:186} INFO - Started process (PID=2683) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:09:44.624+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:09:44.627+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:09:44.627+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:09:44.859+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:09:44.890+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:09:44.890+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:09:44.919+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:09:44.918+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:09:44.942+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.326 seconds
+[2024-10-31T01:10:15.059+0000] {processor.py:186} INFO - Started process (PID=2690) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:10:15.062+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:10:15.067+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:10:15.066+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:10:15.294+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:10:15.340+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:10:15.339+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:10:15.371+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:10:15.371+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:10:15.412+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.360 seconds
+[2024-10-31T01:10:45.734+0000] {processor.py:186} INFO - Started process (PID=2697) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:10:45.736+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:10:45.739+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:10:45.738+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:10:45.881+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:10:45.912+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:10:45.911+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:10:45.940+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:10:45.940+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:10:45.982+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.254 seconds
+[2024-10-31T01:11:16.376+0000] {processor.py:186} INFO - Started process (PID=2704) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:11:16.380+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:11:16.391+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:11:16.390+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:11:16.605+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:11:16.706+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:11:16.706+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:11:16.849+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:11:16.848+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:11:16.922+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.564 seconds
+[2024-10-31T01:11:47.066+0000] {processor.py:186} INFO - Started process (PID=2711) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:11:47.068+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:11:47.072+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:11:47.072+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:11:47.151+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:11:47.184+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:11:47.184+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:11:47.211+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:11:47.211+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:11:47.237+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.180 seconds
+[2024-10-31T01:12:17.495+0000] {processor.py:186} INFO - Started process (PID=2718) to work on /opt/airflow/dags/object_dag.py
+[2024-10-31T01:12:17.498+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/object_dag.py for tasks to queue
+[2024-10-31T01:12:17.502+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:12:17.501+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:12:17.669+0000] {processor.py:925} INFO - DAG(s) 'etl_update_stock_ferrimac' retrieved from /opt/airflow/dags/object_dag.py
+[2024-10-31T01:12:17.696+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:12:17.696+0000] {dag.py:3229} INFO - Sync 1 DAGs
+[2024-10-31T01:12:17.722+0000] {logging_mixin.py:190} INFO - [2024-10-31T01:12:17.722+0000] {dag.py:4156} INFO - Setting next_dagrun for etl_update_stock_ferrimac to 2024-10-30 22:00:00+00:00, run_after=2024-10-31 22:00:00+00:00
+[2024-10-31T01:12:17.745+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/object_dag.py took 0.258 seconds
