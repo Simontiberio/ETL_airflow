@@ -1,0 +1,29 @@
+[2024-10-30T16:48:49.577+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-30T16:48:49.611+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_task_api manual__2024-10-30T16:41:43.751884+00:00 [queued]>
+[2024-10-30T16:48:49.628+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_task_api manual__2024-10-30T16:41:43.751884+00:00 [queued]>
+[2024-10-30T16:48:49.629+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-30T16:48:49.663+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_task_api> on 2024-10-30 16:41:43.751884+00:00
+[2024-10-30T16:48:49.676+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=179) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-30T16:48:49.679+0000] {standard_task_runner.py:72} INFO - Started process 183 to run task
+[2024-10-30T16:48:49.679+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_task_api', 'manual__2024-10-30T16:41:43.751884+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmpx5v90hp8']
+[2024-10-30T16:48:49.684+0000] {standard_task_runner.py:105} INFO - Job 11: Subtask extract_task_api
+[2024-10-30T16:48:49.772+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_task_api manual__2024-10-30T16:41:43.751884+00:00 [running]> on host b789ae629a43
+[2024-10-30T16:48:50.456+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_task_api' AIRFLOW_CTX_EXECUTION_DATE='2024-10-30T16:41:43.751884+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-10-30T16:41:43.751884+00:00'
+[2024-10-30T16:48:50.458+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-30T16:49:39.267+0000] {obtain_currency.py:42} INFO - Current dollar rate: 988.504298 ARS
+[2024-10-30T16:49:39.269+0000] {obtain_currency.py:47} INFO - Current dollar rate: 988.504298 ARS on 2024-10-30
+[2024-10-30T16:49:39.272+0000] {obtain_currency.py:76} INFO - Obtained record: {'date': '2024-10-30', 'price': 988.504298}
+[2024-10-30T16:49:39.280+0000] {obtain_currency.py:88} INFO - Created new file for data_price.csv with columns 'date' and 'price'.
+[2024-10-30T16:49:39.310+0000] {warnings.py:112} WARNING - /opt/***/functions_etl/obtain_currency.py:99: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  data_prices = pd.concat([data_prices, new_record], ignore_index=True)
+
+[2024-10-30T16:49:39.330+0000] {obtain_currency.py:104} INFO - Record for 2024-10-30 added successfully to data_price.csv.
+[2024-10-30T16:49:39.331+0000] {python.py:240} INFO - Done. Returned value was:          date       price
+0  2024-10-30  988.504298
+[2024-10-30T16:49:39.572+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-30T16:49:39.574+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=etl_update_stock_ferrimac, task_id=extract_task_api, run_id=manual__2024-10-30T16:41:43.751884+00:00, execution_date=20241030T164143, start_date=20241030T164849, end_date=20241030T164939
+[2024-10-30T16:49:39.651+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-10-30T16:49:39.697+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-10-30T16:49:39.711+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

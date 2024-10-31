@@ -1,0 +1,473 @@
+[2024-10-30T12:04:49.722+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-30T12:04:49.902+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [queued]>
+[2024-10-30T12:04:49.956+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [queued]>
+[2024-10-30T12:04:49.959+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-30T12:04:50.079+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): load_data_into_Redshif> on 2024-10-28 22:00:00+00:00
+[2024-10-30T12:04:50.125+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=245) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-30T12:04:50.160+0000] {standard_task_runner.py:72} INFO - Started process 251 to run task
+[2024-10-30T12:04:50.134+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'load_data_into_Redshif', 'scheduled__2024-10-28T22:00:00+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmp_9tvb02k']
+[2024-10-30T12:04:50.184+0000] {standard_task_runner.py:105} INFO - Job 16: Subtask load_data_into_Redshif
+[2024-10-30T12:04:50.561+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [running]> on host 0d5052666bc5
+[2024-10-30T12:04:51.160+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='load_data_into_Redshif' AIRFLOW_CTX_EXECUTION_DATE='2024-10-28T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-28T22:00:00+00:00'
+[2024-10-30T12:04:51.184+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-30T12:04:56.936+0000] {load_data.py:116} INFO - Connection to Redshift successful.
+[2024-10-30T12:04:57.371+0000] {load_data.py:119} INFO - Update from Redshift: 2024-10-30
+[2024-10-30T12:04:58.916+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/functions_etl/load_data.py", line 54, in load_data
+    df = pd.read_excel(file_path, engine='openpyxl')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 504, in read_excel
+    io = ExcelFile(
+         ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 1580, in __init__
+    self._reader = self._engines[engine](
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_openpyxl.py", line 553, in __init__
+    super().__init__(
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 582, in __init__
+    self.book = self.load_workbook(self.handles.handle, engine_kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_openpyxl.py", line 570, in load_workbook
+    return load_workbook(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 315, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/zipfile/__init__.py", line 1349, in __init__
+    self._RealGetContents()
+  File "/usr/local/lib/python3.12/zipfile/__init__.py", line 1446, in _RealGetContents
+    raise BadZipFile("Bad magic number for central directory")
+zipfile.BadZipFile: Bad magic number for central directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 124, in load_data_to_Redshift
+    df = load_data(file)  # Ensure load_data has error handling
+         ^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 68, in load_data
+    raise RuntimeError(f"Error reading file: {e}")
+RuntimeError: Error reading file: Bad magic number for central directory
+[2024-10-30T12:04:59.076+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=load_data_into_Redshif, run_id=scheduled__2024-10-28T22:00:00+00:00, execution_date=20241028T220000, start_date=20241030T120449, end_date=20241030T120459
+[2024-10-30T12:04:59.193+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-30T12:04:59.259+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 16 for task load_data_into_Redshif (Error reading file: Bad magic number for central directory; 251)
+Traceback (most recent call last):
+  File "/opt/airflow/functions_etl/load_data.py", line 54, in load_data
+    df = pd.read_excel(file_path, engine='openpyxl')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 504, in read_excel
+    io = ExcelFile(
+         ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 1580, in __init__
+    self._reader = self._engines[engine](
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_openpyxl.py", line 553, in __init__
+    super().__init__(
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 582, in __init__
+    self.book = self.load_workbook(self.handles.handle, engine_kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_openpyxl.py", line 570, in load_workbook
+    return load_workbook(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 315, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/zipfile/__init__.py", line 1349, in __init__
+    self._RealGetContents()
+  File "/usr/local/lib/python3.12/zipfile/__init__.py", line 1446, in _RealGetContents
+    raise BadZipFile("Bad magic number for central directory")
+zipfile.BadZipFile: Bad magic number for central directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 124, in load_data_to_Redshift
+    df = load_data(file)  # Ensure load_data has error handling
+         ^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 68, in load_data
+    raise RuntimeError(f"Error reading file: {e}")
+RuntimeError: Error reading file: Bad magic number for central directory
+[2024-10-30T12:04:59.478+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-30T12:04:59.544+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-30T12:04:59.561+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-30T12:54:36.176+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-30T12:54:36.237+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [queued]>
+[2024-10-30T12:54:36.268+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [queued]>
+[2024-10-30T12:54:36.270+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-30T12:54:36.313+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): load_data_into_Redshif> on 2024-10-28 22:00:00+00:00
+[2024-10-30T12:54:36.333+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=245) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-30T12:54:36.340+0000] {standard_task_runner.py:72} INFO - Started process 251 to run task
+[2024-10-30T12:54:36.340+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'load_data_into_Redshif', 'scheduled__2024-10-28T22:00:00+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmpok5166nh']
+[2024-10-30T12:54:36.350+0000] {standard_task_runner.py:105} INFO - Job 16: Subtask load_data_into_Redshif
+[2024-10-30T12:54:36.490+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [running]> on host 1e26175021c2
+[2024-10-30T12:54:36.693+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='load_data_into_Redshif' AIRFLOW_CTX_EXECUTION_DATE='2024-10-28T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-28T22:00:00+00:00'
+[2024-10-30T12:54:36.695+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-30T12:54:39.967+0000] {load_data.py:116} INFO - Connection to Redshift successful.
+[2024-10-30T12:54:40.290+0000] {load_data.py:119} INFO - Update from Redshift: 2024-10-30
+[2024-10-30T12:54:40.707+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/functions_etl/load_data.py", line 54, in load_data
+    df = pd.read_excel(file_path, engine='openpyxl')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 504, in read_excel
+    io = ExcelFile(
+         ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 1580, in __init__
+    self._reader = self._engines[engine](
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_openpyxl.py", line 553, in __init__
+    super().__init__(
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 582, in __init__
+    self.book = self.load_workbook(self.handles.handle, engine_kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_openpyxl.py", line 570, in load_workbook
+    return load_workbook(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 315, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/zipfile/__init__.py", line 1349, in __init__
+    self._RealGetContents()
+  File "/usr/local/lib/python3.12/zipfile/__init__.py", line 1446, in _RealGetContents
+    raise BadZipFile("Bad magic number for central directory")
+zipfile.BadZipFile: Bad magic number for central directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 124, in load_data_to_Redshift
+    df = load_data(file)  # Ensure load_data has error handling
+         ^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 68, in load_data
+    raise RuntimeError(f"Error reading file: {e}")
+RuntimeError: Error reading file: Bad magic number for central directory
+[2024-10-30T12:54:40.728+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=load_data_into_Redshif, run_id=scheduled__2024-10-28T22:00:00+00:00, execution_date=20241028T220000, start_date=20241030T125436, end_date=20241030T125440
+[2024-10-30T12:54:40.750+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-30T12:54:40.751+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 16 for task load_data_into_Redshif (Error reading file: Bad magic number for central directory; 251)
+Traceback (most recent call last):
+  File "/opt/airflow/functions_etl/load_data.py", line 54, in load_data
+    df = pd.read_excel(file_path, engine='openpyxl')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 504, in read_excel
+    io = ExcelFile(
+         ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 1580, in __init__
+    self._reader = self._engines[engine](
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_openpyxl.py", line 553, in __init__
+    super().__init__(
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_base.py", line 582, in __init__
+    self.book = self.load_workbook(self.handles.handle, engine_kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/excel/_openpyxl.py", line 570, in load_workbook
+    return load_workbook(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 315, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/zipfile/__init__.py", line 1349, in __init__
+    self._RealGetContents()
+  File "/usr/local/lib/python3.12/zipfile/__init__.py", line 1446, in _RealGetContents
+    raise BadZipFile("Bad magic number for central directory")
+zipfile.BadZipFile: Bad magic number for central directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 124, in load_data_to_Redshift
+    df = load_data(file)  # Ensure load_data has error handling
+         ^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 68, in load_data
+    raise RuntimeError(f"Error reading file: {e}")
+RuntimeError: Error reading file: Bad magic number for central directory
+[2024-10-30T12:54:40.818+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-30T12:54:40.844+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-30T12:54:40.854+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-30T16:54:58.461+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-30T16:54:58.529+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [queued]>
+[2024-10-30T16:54:58.555+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [queued]>
+[2024-10-30T16:54:58.556+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-30T16:54:58.603+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): load_data_into_Redshif> on 2024-10-28 22:00:00+00:00
+[2024-10-30T16:54:58.624+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=281) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-30T16:54:58.629+0000] {standard_task_runner.py:72} INFO - Started process 287 to run task
+[2024-10-30T16:54:58.627+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'load_data_into_Redshif', 'scheduled__2024-10-28T22:00:00+00:00', '--job-id', '19', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmpaewupkqz']
+[2024-10-30T16:54:58.636+0000] {standard_task_runner.py:105} INFO - Job 19: Subtask load_data_into_Redshif
+[2024-10-30T16:54:58.786+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.load_data_into_Redshif scheduled__2024-10-28T22:00:00+00:00 [running]> on host b789ae629a43
+[2024-10-30T16:54:59.020+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='load_data_into_Redshif' AIRFLOW_CTX_EXECUTION_DATE='2024-10-28T22:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-28T22:00:00+00:00'
+[2024-10-30T16:54:59.022+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-30T16:55:02.215+0000] {load_data.py:116} INFO - Connection to Redshift successful.
+[2024-10-30T16:55:02.548+0000] {load_data.py:119} INFO - Update from Redshift: 2024-10-30
+[2024-10-30T16:55:02.713+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 124, in load_data_to_Redshift
+    df = load_data(file)
+       ^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 37, in load_data
+    raise FileNotFoundError(f"Error: File '{file_path}' not found.")
+FileNotFoundError: Error: File 'base_datos/inventario/monetized_stock.xlsx' not found.
+[2024-10-30T16:55:02.734+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=etl_update_stock_ferrimac, task_id=load_data_into_Redshif, run_id=scheduled__2024-10-28T22:00:00+00:00, execution_date=20241028T220000, start_date=20241030T165458, end_date=20241030T165502
+[2024-10-30T16:55:02.763+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-30T16:55:02.764+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 19 for task load_data_into_Redshif (Error: File 'base_datos/inventario/monetized_stock.xlsx' not found.; 287)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 124, in load_data_to_Redshift
+    df = load_data(file)
+       ^^^^^^^^^^^^^^^
+  File "/opt/airflow/functions_etl/load_data.py", line 37, in load_data
+    raise FileNotFoundError(f"Error: File '{file_path}' not found.")
+FileNotFoundError: Error: File 'base_datos/inventario/monetized_stock.xlsx' not found.
+[2024-10-30T16:55:02.788+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-30T16:55:02.810+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-30T16:55:02.813+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
