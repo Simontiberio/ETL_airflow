@@ -95,6 +95,19 @@ docker-compose up -d
 4- Acceder a la interfaz de Airflow en http://localhost:8080 y activar el DAG llamado etl_update_stock_ferrimac.
 
 
+5- Credenciales de acceso
+
+Usuario: airflow
+Contraseña: airflow
+
+Nota: Asegúrate de que estas credenciales coincidan con las configuradas en tu archivo docker-compose.yml, si las has cambiado.
+
+6- Activar el DAG
+
+Después de iniciar sesión, activa el DAG llamado etl_update_stock_ferrimac para comenzar el proceso de ETL. Puedes encontrarlo en la lista de DAGs en la interfaz principal.
+
+
+
 ## Estructura del Pipeline.
 
 El pipeline de Airflow se compone de tres fases principales:
@@ -103,27 +116,27 @@ El pipeline de Airflow se compone de tres fases principales:
 
 En esta etapa, se recolectan los datos mediante tres tareas ejecutadas en paralelo:
 
-``` def append_to_data_price():``` Obtiene diariamente la cotización del dólar desde una API, actualizando un archivo histórico de cotizaciones.
+``` append_to_data_price :``` Obtiene diariamente la cotización del dólar desde una API, actualizando un archivo histórico de cotizaciones.
 
-``` def extract_file_sells_to_stock (): ``` Extrae las ventas diarias del sistema de ventas al cierre de cada jornada.
+``` extract_file_sells_to_stock : ``` Extrae las ventas diarias del sistema de ventas al cierre de cada jornada.
 
-``` def extract_file_purchases_to_stock ():``` Recupera las compras de productos a distintos proveedores, actualizando el inventario con las compras recepcionadas.
+``` extract_file_purchases_to_stock :``` Recupera las compras de productos a distintos proveedores, actualizando el inventario con las compras recepcionadas.
 
 :two: Transformación de Datos
 
 Aquí se transforman los datos para calcular el valor del stock.
 
-``` def update_stock (): ```: Actualiza el stock diario considerando las ventas y compras registradas.
+``` update_stock : ```: Actualiza el stock diario considerando las ventas y compras registradas.
 
-``` def monetize_stock ():``` Valoriza el stock actualizado utilizando la última lista de precios en dólares y la cotización del día.
+``` monetize_stock :``` Valoriza el stock actualizado utilizando la última lista de precios en dólares y la cotización del día.
 
 :three: Carga de Datos
 
 En esta última etapa, los datos son almacenados y cargados en Redshift.
 
-``` def load_data ():``` Convierte el stock valorizado a formato Parquet para un almacenamiento más eficiente.
+``` load_data :``` Convierte el stock valorizado a formato Parquet para un almacenamiento más eficiente.
 
-``` def load_data_to_Redshift ():``` Carga el archivo Parquet a la base de datos Redshift, ubicada en un cluster de AWS.
+``` load_data_to_Redshift :``` Carga el archivo Parquet a la base de datos Redshift, ubicada en un cluster de AWS.
 
 
 ## Representacion gráfica del DAG y sus dependencias entre tareas.
@@ -145,3 +158,74 @@ A continuacion, se muestra como se modelo el subdomionio de mercaderias:
 
 
 ![Diagrama Entidad Relacion ](./DER-Ferrimac.png)
+
+
+## 🗂️ Descripción del Modelo de Datos. 📝 
+
+Este modelo de datos soporta la valorización y gestión de inventarios mediante el almacenamiento de información clave sobre productos, proveedores y registros diarios de actividades (ventas, compras y valorización de stock). La estructura de las tablas facilita un análisis detallado y diario de cada aspecto de la gestión de inventarios.
+
+Columnas de Producto y Proveedor:
+
+Las primeras cinco columnas (id_product, model, descripcion, suppliers, y blands) contienen información descriptiva y de identificación del producto, así como detalles del proveedor y marca.
+
+Campos de Fecha (date-xx):
+
+Cada columna con un formato de fecha (por ejemplo, 2024-19-09) representa un snapshot diario de las operaciones, manteniendo un registro detallado de las actividades de cada día del mes.
+Granularidad: Estas columnas de fecha representan valores diarios, con un snapshot diario de cada variable (como stock, unidades vendidas y compras). Esto permite analizar las variaciones diarias del inventario y calcular el valor del stock en función de los movimientos de venta y compra, y la cotización diaria del dólar.
+Propósito de las fechas: Al incluir una columna por cada día del mes, es posible observar el comportamiento y cambios en el stock en un intervalo de tiempo específico, facilitando tanto la consulta histórica como el análisis de tendencias y la valorización precisa.
+
+
+### ⚙️ Pruebas Unitarias
+
+Este proyecto cuenta con un conjunto de pruebas unitarias implementadas con la biblioteca `pytest`. Estas pruebas permiten verificar el correcto funcionamiento de funciones clave, asegurando que los datos se carguen y transformen adecuadamente y que la conexión con la API se realice de forma correcta. Ejecutar las pruebas de manera regular ayuda a detectar posibles errores o cambios en el comportamiento esperado, mejorando así la calidad y la confiabilidad del código.
+
+#### 🔍 Funcionalidad de las Pruebas Actuales
+
+1. **📄 Prueba de carga de datos** (`test_load_data_xlsx`): Valida si el archivo se carga correctamente en formato Excel, convirtiéndolo en un archivo parquet con la estructura y ubicación esperada.
+2. **💱 Prueba de obtención de cotizacion del dolar** (`test_obtain_currency`): Comprueba si se obtiene el diccionario con los datos correctos desde una API externa, validando la respuesta y estructura esperada.
+
+#### 📋 Requisitos Previos
+
+Para ejecutar las pruebas unitarias, asegurarse de que `pytest` esté instalado. Si no lo tienes, puedes instalarlo con:
+
+```bash
+pip install pytest
+```
+
+### 🚀 Instrucciones para Ejecutar las Pruebas
+
+ 1- Dirígete al directorio raíz del proyecto:
+
+```bash
+cd etl_airflow/test/
+```
+
+ 2- Ejecuta todas las pruebas unitarias usando el comando:
+
+```bash
+pytest test_load_data_file.py
+```
+
+```bash
+pytest obtain_currency.py
+```
+
+3- Si deseas ver detalles de cada prueba (modo detallado), ejecuta:
+
+```bash
+pytest -v test_load_data_file.py
+```
+
+
+## 🛠️ Áreas de Mejora  🔧 
+
+Para continuar evolucionando y mejorando el pipeline de datos desarrollado para Ferrimac, se identifican las siguientes oportunidades de mejora, que pueden brindar un valor agregado y permitir una gestión más eficiente de las operaciones del negocio:
+
+:one: Modelos Predictivos para anticiparse al comportamiento de las variables del negocio: 
+La implementación de modelos de machine learning que permitan predecir la volatilidad del tipo de cambio beneficiaría la toma de decisiones financieras y de compra de inventario. Con estas proyecciones, Ferrimac podría optimizar sus compras y reducir riesgos asociados a fluctuaciones en la divisa, mejorando la precisión en la valorización de su stock y en la planificación de costos.  Lo mismo aplica para las predicciones de los picos de demanda. Esto permitiría a Ferrimac planificar inventarios y asegurar disponibilidad de productos en momentos clave, optimizando la cadena de suministro y reduciendo costos de oportunidad asociados a la falta de stock.
+
+
+:two: Desarrollo de interfaces gráficas para la visualización de datos : 
+Incorporar interfaces gráficas permitiría a Ferrimac visualizar de manera intuitiva y en tiempo real la información clave sobre las variaciones del tipo de cambio y la valorización del stock. Estas visualizaciones facilitarían la identificación de tendencias y patrones de forma rápida y accesible, permitiendo al equipo tomar decisiones informadas y en tiempo adecuado. Además, una representación visual de los datos aumentaría la transparencia y comprensión de la evolución del negocio, mejorando la comunicación y el análisis estratégico.
+
+Estas áreas de mejora proporcionarían una visión integral de los datos, convirtiéndolos en un activo estratégico que no solo gestione el presente, sino que también permita a Ferrimac prepararse para el futuro, anticipando riesgos y capitalizando oportunidades de manera más eficiente.
