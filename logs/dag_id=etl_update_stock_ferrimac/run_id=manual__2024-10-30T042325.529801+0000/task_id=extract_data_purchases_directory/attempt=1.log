@@ -1,0 +1,21 @@
+[2024-10-30T04:23:27.094+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-30T04:23:27.116+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory manual__2024-10-30T04:23:25.529801+00:00 [queued]>
+[2024-10-30T04:23:27.123+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory manual__2024-10-30T04:23:25.529801+00:00 [queued]>
+[2024-10-30T04:23:27.124+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2024-10-30T04:23:27.138+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data_purchases_directory> on 2024-10-30 04:23:25.529801+00:00
+[2024-10-30T04:23:27.145+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=497) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-30T04:23:27.147+0000] {standard_task_runner.py:72} INFO - Started process 503 to run task
+[2024-10-30T04:23:27.146+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_data_purchases_directory', 'manual__2024-10-30T04:23:25.529801+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmp_3cmb1rp']
+[2024-10-30T04:23:27.149+0000] {standard_task_runner.py:105} INFO - Job 30: Subtask extract_data_purchases_directory
+[2024-10-30T04:23:27.198+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_data_purchases_directory manual__2024-10-30T04:23:25.529801+00:00 [running]> on host 7dff020afbaf
+[2024-10-30T04:23:27.272+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_data_purchases_directory' AIRFLOW_CTX_EXECUTION_DATE='2024-10-30T04:23:25.529801+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-10-30T04:23:25.529801+00:00'
+[2024-10-30T04:23:27.273+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-30T04:23:27.551+0000] {extract_file_purchases_to_stock.py:56} INFO - File 'compras_stock.xlsx' moved to stock folder successfully.
+[2024-10-30T04:23:27.551+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-10-30T04:23:27.560+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-30T04:23:27.561+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=etl_update_stock_ferrimac, task_id=extract_data_purchases_directory, run_id=manual__2024-10-30T04:23:25.529801+00:00, execution_date=20241030T042325, start_date=20241030T042327, end_date=20241030T042327
+[2024-10-30T04:23:27.602+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-10-30T04:23:27.624+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-30T04:23:27.627+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

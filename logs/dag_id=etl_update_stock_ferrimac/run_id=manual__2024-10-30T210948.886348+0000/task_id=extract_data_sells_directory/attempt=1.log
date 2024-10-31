@@ -1,0 +1,27 @@
+[2024-10-30T21:09:52.437+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-30T21:09:52.501+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_sells_directory manual__2024-10-30T21:09:48.886348+00:00 [queued]>
+[2024-10-30T21:09:52.533+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_data_sells_directory manual__2024-10-30T21:09:48.886348+00:00 [queued]>
+[2024-10-30T21:09:52.534+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2024-10-30T21:09:52.594+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data_sells_directory> on 2024-10-30 21:09:48.886348+00:00
+[2024-10-30T21:09:52.609+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=269) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-30T21:09:52.613+0000] {standard_task_runner.py:72} INFO - Started process 277 to run task
+[2024-10-30T21:09:52.620+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_data_sells_directory', 'manual__2024-10-30T21:09:48.886348+00:00', '--job-id', '26', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmp9zfz391f']
+[2024-10-30T21:09:52.627+0000] {standard_task_runner.py:105} INFO - Job 26: Subtask extract_data_sells_directory
+[2024-10-30T21:09:52.825+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_data_sells_directory manual__2024-10-30T21:09:48.886348+00:00 [running]> on host c7c3cbcf326f
+[2024-10-30T21:09:53.668+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_data_sells_directory' AIRFLOW_CTX_EXECUTION_DATE='2024-10-30T21:09:48.886348+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-10-30T21:09:48.886348+00:00'
+[2024-10-30T21:09:53.670+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-30T21:09:53.706+0000] {extract_file_sells_to_stock.py:29} INFO - Base directory set to './base_datos/'
+[2024-10-30T21:09:53.707+0000] {extract_file_sells_to_stock.py:35} INFO - Origin directory: base_datos/ventas
+[2024-10-30T21:09:53.708+0000] {extract_file_sells_to_stock.py:36} INFO - Destination directory: base_datos/inventario
+[2024-10-30T21:09:53.713+0000] {extract_file_sells_to_stock.py:51} INFO - Origin file path set to 'base_datos/ventas/ventas_unidades.csv'
+[2024-10-30T21:09:53.716+0000] {extract_file_sells_to_stock.py:56} INFO - Destination file path set to 'base_datos/inventario/ventas_unidades.csv'
+[2024-10-30T21:09:53.717+0000] {extract_file_sells_to_stock.py:58} INFO - Attempting to copy 'base_datos/ventas/ventas_unidades.csv' to 'base_datos/inventario/ventas_unidades.csv'
+[2024-10-30T21:09:53.753+0000] {extract_file_sells_to_stock.py:63} ERROR - PermissionError while copying file: [Errno 1] Operation not permitted: 'base_datos/inventario/ventas_unidades.csv'
+[2024-10-30T21:09:53.755+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-10-30T21:09:53.784+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-30T21:09:53.786+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=etl_update_stock_ferrimac, task_id=extract_data_sells_directory, run_id=manual__2024-10-30T21:09:48.886348+00:00, execution_date=20241030T210948, start_date=20241030T210952, end_date=20241030T210953
+[2024-10-30T21:09:53.881+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-10-30T21:09:53.943+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-30T21:09:53.957+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

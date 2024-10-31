@@ -1,0 +1,77 @@
+[2024-10-30T16:21:42.867+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-30T16:21:42.906+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_task_api manual__2024-10-30T16:21:34.068579+00:00 [queued]>
+[2024-10-30T16:21:42.925+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_update_stock_ferrimac.extract_task_api manual__2024-10-30T16:21:34.068579+00:00 [queued]>
+[2024-10-30T16:21:42.926+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2024-10-30T16:21:42.998+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_task_api> on 2024-10-30 16:21:34.068579+00:00
+[2024-10-30T16:21:43.018+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=79) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-30T16:21:43.026+0000] {standard_task_runner.py:72} INFO - Started process 94 to run task
+[2024-10-30T16:21:43.028+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_update_stock_ferrimac', 'extract_task_api', 'manual__2024-10-30T16:21:34.068579+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/object_dag.py', '--cfg-path', '/tmp/tmplkinmnjh']
+[2024-10-30T16:21:43.038+0000] {standard_task_runner.py:105} INFO - Job 30: Subtask extract_task_api
+[2024-10-30T16:21:43.192+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_update_stock_ferrimac.extract_task_api manual__2024-10-30T16:21:34.068579+00:00 [running]> on host b10f050791aa
+[2024-10-30T16:21:43.474+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_update_stock_ferrimac' AIRFLOW_CTX_TASK_ID='extract_task_api' AIRFLOW_CTX_EXECUTION_DATE='2024-10-30T16:21:34.068579+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-10-30T16:21:34.068579+00:00'
+[2024-10-30T16:21:43.477+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-30T16:22:05.455+0000] {obtain_currency.py:42} INFO - Current dollar rate: 988.872902 ARS
+[2024-10-30T16:22:05.457+0000] {obtain_currency.py:47} INFO - Current dollar rate: 988.872902 ARS on 2024-10-30
+[2024-10-30T16:22:05.461+0000] {obtain_currency.py:76} INFO - Obtained record: {'date': '2024-10-30', 'price': 988.872902}
+[2024-10-30T16:22:05.486+0000] {obtain_currency.py:93} WARNING - Record for 2024-10-30 already exists. No new entry added.
+[2024-10-30T16:22:05.487+0000] {python.py:240} INFO - Done. Returned value was:           date       price
+0   2024-09-09  957.763020
+1   2024-09-10  957.430504
+2   2024-09-11  957.741278
+3   2024-09-12  959.995667
+4   2024-09-13  958.043112
+5   2024-09-14  959.250402
+6   2024-09-15  959.249945
+7   2024-09-16  960.448297
+8   2024-09-17  961.241401
+9   2024-09-18  962.250058
+10  2024-09-19  962.754297
+11  2024-09-20  961.531104
+12  2024-09-21  961.359012
+13  2024-09-22  962.642198
+14  2024-09-23  965.232700
+15  2024-09-24  965.262902
+16  2024-09-25  968.500099
+17  2024-09-26  967.232698
+18  2024-09-27  965.466231
+19  2024-09-28  965.466231
+20  2024-09-29  965.617504
+21  2024-09-30  968.767443
+22  2024-10-01  969.592296
+23  2024-10-02  970.245698
+24  2024-10-03  971.736897
+25  2024-10-04  975.742773
+26  2024-10-05  975.742773
+27  2024-10-06  976.734404
+28  2024-10-07  974.829898
+29  2024-10-08  974.254402
+30  2024-10-09  974.741097
+31  2024-10-10  974.741098
+32  2024-10-11  973.490388
+33  2024-10-12  973.490389
+34  2024-10-13  973.490390
+35  2024-10-14  973.490391
+36  2024-10-15  973.490391
+37  2024-10-16  980.718400
+38  2024-10-17  980.227502
+39  2024-10-18  979.924976
+40  2024-10-19  979.924976
+41  2024-10-20  979.924977
+42  2024-10-21  979.924977
+43  2024-10-22  979.924978
+44  2024-10-23  979.924980
+45  2024-10-24  979.924981
+46  2024-10-25  987.741168
+47  2024-10-26  987.741168
+48  2024-10-26  987.741168
+49  2024-10-27  987.741168
+50  2024-10-28  987.741169
+51  2024-10-29  987.759198
+52  2024-10-30  987.759197
+[2024-10-30T16:22:05.617+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-30T16:22:05.618+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=etl_update_stock_ferrimac, task_id=extract_task_api, run_id=manual__2024-10-30T16:21:34.068579+00:00, execution_date=20241030T162134, start_date=20241030T162142, end_date=20241030T162205
+[2024-10-30T16:22:05.664+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-10-30T16:22:05.702+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-30T16:22:05.720+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
