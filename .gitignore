@@ -1,3 +1,13 @@
-# Ignorar el archivo de configuración
-config.py
+.env
+validation_functions.ipynb
+validation.ipynb
 
+.ipynb_checkpoints
+
+functions_testing_etl/
+
+plugins/
+logs/
+__pycache__/
+.pytest_cache
+config/
