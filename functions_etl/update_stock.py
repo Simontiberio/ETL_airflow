@@ -77,7 +77,6 @@ def update_stock(stock_file: str, compras_file: str, ventas_file: str, date: Uni
     # Save the updated stock file
     df_stock.to_excel(stock_path, index=False)
     logging.info(f"Stock file updated for date {date} and saved to {stock_path}.")
-
                  
 
 

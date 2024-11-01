@@ -96,4 +96,3 @@ def monetize_stock (stock_file: str, data_quotes: str, date: str):
                 
     logging.info(f"Monetized stock has been successfully updated for date {date}.")
     return df_monetized_stock            
-
