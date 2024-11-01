@@ -98,6 +98,7 @@ docker-compose up -d
 5- Credenciales de acceso
 
 Usuario: airflow
+
 Contraseña: airflow
 
 Nota: Asegúrate de que estas credenciales coincidan con las configuradas en tu archivo docker-compose.yml, si las has cambiado.
@@ -181,7 +182,7 @@ Este proyecto cuenta con un conjunto de pruebas unitarias implementadas con la b
 
 #### 🔍 Funcionalidad de las Pruebas Actuales
 
-1. **📄 Prueba de carga de datos** (`test_load_data_xlsx`): Valida si el archivo se carga correctamente en formato Excel, convirtiéndolo en un archivo parquet con la estructura y ubicación esperada.
+1. **📄 Prueba de carga de datos** (`test_load_data_file`): Valida si el archivo se carga correctamente en formato Excel, convirtiéndolo en un archivo parquet con la estructura y ubicación esperada.
 2. **💱 Prueba de obtención de cotizacion del dolar** (`test_obtain_currency`): Comprueba si se obtiene el diccionario con los datos correctos desde una API externa, validando la respuesta y estructura esperada.
 
 #### 📋 Requisitos Previos
