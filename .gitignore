@@ -10,5 +10,5 @@ plugins/
 logs/
 __pycache__/
 .pytest_cache
-config/
+
 utils/__pycache__/
