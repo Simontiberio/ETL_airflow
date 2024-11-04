@@ -29,8 +29,7 @@ with DAG (
     start_date= datetime(2024,1,1),
     catchup= False,
 ) as dag: 
-    pass 
-
+    
 
     # Task 1 : Extract data from API.
 
