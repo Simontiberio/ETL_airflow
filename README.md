@@ -65,8 +65,6 @@ git clone git@github.com:Simontiberio/ETL_airflow.git
 
 
 ```bash
-# UID AIRFLOW.
-AIRFLOW_UID=1000
 
 # Credenciales Redshift.
 REDSHIFT_USER= '2024_nombre_apellido'
@@ -89,7 +87,7 @@ list_prices_file = 'nombre_archivo.xlsx'
 3- Iniciar los servicios de Airflow utilizando Docker Compose:
 
 ```bash
-docker-compose up -d
+docker-compose --env-file .env up -d
 ```
 
 4- Acceder a la interfaz de Airflow en http://localhost:8080 y activar el DAG llamado etl_update_stock_ferrimac.
