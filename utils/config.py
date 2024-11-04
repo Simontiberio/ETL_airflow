@@ -3,7 +3,10 @@ from dotenv import load_dotenv
 
 # Cargar las variables del archivo .env
 
-load_dotenv()
+DIR_PATH: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+dotenv_path: str = os.path.join(DIR_PATH, '.env')
+load_dotenv(dotenv_path)
+
 
 # Acceder a las variables de entorno
 

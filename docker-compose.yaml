@@ -73,6 +73,10 @@ x-airflow-common:
     # The following line can be used to set a custom config file, stored in the local config folder
     # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
     # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+
+  env_file:
+    - ./.env
+
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
@@ -82,8 +86,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/functions_etl:/opt/airflow/functions_etl
     - ${AIRFLOW_PROJ_DIR:-.}/base_datos:/opt/airflow/base_datos
 
-  env_file:
-    - ./utils/.env
+ 
 
   user: "${AIRFLOW_UID:-1000}:0"
   depends_on:
