@@ -83,7 +83,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/base_datos:/opt/airflow/base_datos
 
   env_file:
-    - ./utils/.env
+    - /utils/.env
 
   user: "${AIRFLOW_UID:-1000}:0"
   depends_on:
