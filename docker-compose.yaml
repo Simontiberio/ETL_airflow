@@ -82,7 +82,9 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/functions_etl:/opt/airflow/functions_etl
     - ${AIRFLOW_PROJ_DIR:-.}/base_datos:/opt/airflow/base_datos
 
- 
+  env_file:
+    - utils/config/.env
+
   user: "${AIRFLOW_UID:-1000}:0"
   depends_on:
     &airflow-common-depends-on
