@@ -56,7 +56,7 @@ def update_stock(stock_file: str, compras_file: str, ventas_file: str, date: Uni
 
     # Check if a record already exists for the specified date
     if not df_stock[df_stock['date'] == date].empty:
-        print(f"A record already exists for {date}. No update was performed.")
+        print(f"A record already exists for {date}. No updated.")
         return
 
     # Filter rows for the specified date in purchases and sales
