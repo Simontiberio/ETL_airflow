@@ -156,7 +156,7 @@ A continuacion, se muestra como se modelo el subdomionio de mercaderias:
 
 
 
-![Diagrama Entidad Relacion ](./DER-Ferrimac.png)
+![Diagrama Entidad Relacion ](./ferrimac_DER.png)
 
 
 ## 🗂️ Descripción del Modelo de Datos. 📝 
@@ -165,9 +165,9 @@ Este modelo de datos soporta la valorización y gestión de inventarios mediante
 
 Columnas de Producto y Proveedor:
 
-Las primeras cinco columnas (id_product, model, descripcion, suppliers, y blands) contienen información descriptiva y de identificación del producto, así como detalles del proveedor y marca.
+Las primeras cinco columnas (id_product, model, descripcion, suppliers, y brands) contienen información descriptiva y de identificación del producto, así como detalles del proveedor y marca.
 
-Campos de Fecha (date-xx):
+Campos de Fecha (date):
 
 Cada columna con un formato de fecha (por ejemplo, 2024-19-09) representa un snapshot diario de las operaciones, manteniendo un registro detallado de las actividades de cada día del mes.
 Granularidad: Estas columnas de fecha representan valores diarios, con un snapshot diario de cada variable (como stock, unidades vendidas y compras). Esto permite analizar las variaciones diarias del inventario y calcular el valor del stock en función de los movimientos de venta y compra, y la cotización diaria del dólar.
