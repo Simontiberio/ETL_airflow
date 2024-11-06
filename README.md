@@ -82,6 +82,7 @@ ventas_file = 'nombre_archivo.xlsx'
 monetized_stock_file = 'nombre_archivo.xlsx'
 data_quotes = 'nombre_archivo.csv'
 list_prices_file = 'nombre_archivo.xlsx'
+UID = $(id -u 2>/dev/null || echo 1000)
 
 ```
 3- Iniciar los servicios de Airflow utilizando Docker Compose:

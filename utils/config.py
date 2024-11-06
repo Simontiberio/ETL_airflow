@@ -10,7 +10,7 @@ load_dotenv(dotenv_path)
 
 # Acceder a las variables de entorno
 
-AIRFLOW_UID=os.environ.get('AIRFLOW_UID')
+AIRFLOW_UID=os.environ.get('UID')
 
 
 REDSHIFT_USER = os.environ.get('REDSHIFT_USER')
