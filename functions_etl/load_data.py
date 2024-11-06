@@ -132,7 +132,7 @@ def load_data_to_Redshift(file: str):
     
     try:
         # Load DataFrame into Redshift table
-        df.to_sql(redshift_table, con=engine, schema=REDSHIFT_SCHEMA, if_exists='append', index=False)
+        df.to_sql(redshift_table, con=engine, schema=REDSHIFT_SCHEMA, if_exists='replace', index=False)
         logging.info(f"File '{file}' successfully loaded into Redshift table '{redshift_table}'.")
     except Exception as e:
         raise RuntimeError(f"Error loading data into Redshift table '{redshift_table}': {e}")
