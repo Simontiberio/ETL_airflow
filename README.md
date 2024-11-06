@@ -61,7 +61,7 @@ git clone git@github.com:Simontiberio/ETL_airflow.git
 
 ```
 
-2- Crear un archivo .env con las configuraciones necesarias, incluyendo las credenciales de la API y las rutas de los archivos de ventas y compras.
+2- Crear un archivo .env en el directorio principal del proyecto, incluyendo las credenciales de la API y las rutas de los archivos de ventas y compras.
 
 
 ```bash
