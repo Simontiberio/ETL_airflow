@@ -49,12 +49,17 @@ def monetize_stock (stock_file: str, data_quotes: str, date: str):
     df_list_prices = pd.read_excel(list_prices_path, engine='openpyxl')
         
     # Convert date columns to datetime format.
-    df_stock.columns = pd.to_datetime(df_stock.columns, errors='ignore', dayfirst=True)
+    df_stock['date']  = pd.to_datetime(df_stock['date'], dayfirst=True, format='%Y-%m-%d')
     df_quotes['date'] = pd.to_datetime(df_quotes['date'], errors='coerce', format='%Y-%m-%d')
-    df_list_prices.columns = pd.to_datetime(df_list_prices.columns, errors='ignore', dayfirst=True)
+    df_list_prices['date'] = pd.to_datetime(df_list_prices['date'], format='%Y-%m-%d', dayfirst=True)
         
     # Convert date to datetime format. 
     date = pd.to_datetime(date, format='%Y-%m-%d')
+
+    # Create a new DF to calculate stock valuation of the day.
+
+    df = df_stock[df_stock['date'] == date ]
+    df.loc [:,'date'] = date
         
     # Check if the date exists in df_quotes.
     if date not in df_quotes['date'].values:
@@ -65,33 +70,39 @@ def monetize_stock (stock_file: str, data_quotes: str, date: str):
     if not current_price:
         logging.warning(f"Price not found for date {date}.")
         return None
-            
-    current_price = current_price[0]  # Get the first value of the price.
+    
+    # Get the first value of the price.
+    current_price = current_price[0]  
 
-    # Create DataFrame with the current prices so that the arithmetic calculation can be done.
-    current_price_df = pd.DataFrame({'price': [current_price] * len(df_stock['id_product'])})
+    #Get the latest list of price.
+    last_date = df_list_prices['date'].max()
+    latest_prices = df_list_prices[df_list_prices['date'] == last_date]
+    latest_prices = latest_prices['price'].round(2)
                 
     # Calculate the stock monetized by the price and list prices for the given date.
-    monetized_values = (df_stock[date] * current_price_df['price'] * df_list_prices.iloc[:, -1]).round(2)
+    df_amount = latest_prices * current_price * df['Quantity'].values
+    df['Quantity'] = df_amount.values.round(2)
+    df = df.rename(columns={'Quantity': 'amount'})
 
     # Load the existing monetized stock file if it exists.
     if monetized_stock_path.exists():
         df_monetized_stock = pd.read_excel(monetized_stock_path, engine='openpyxl')
-    else:
-        df_monetized_stock = pd.DataFrame({'id_product': df_stock['id_product']})
+        df_monetized_stock['date'] = pd.to_datetime(df_monetized_stock['date'], errors='coerce', format='%Y-%m-%d')
+    
+    # Update the current date in df_monetized_stock.
 
-    # Update or create the column for the current date in df_monetized_stock.
-    if date not in df_monetized_stock.columns:
-        df_monetized_stock[date] = monetized_values
+    if date in df_monetized_stock['date'].values:
+       logging.info(f"Data is already found for {date}. Please check what is uploaded.")
     else:
      # Update only the rows that correspond to existing products
-        df_monetized_stock[date].update(monetized_values)
+        df_monetized_stock = pd.concat([df_monetized_stock, df], ignore_index=True)
 
-    # Save the updated stock with all dates to the file.
-    df_monetized_stock.to_excel(monetized_stock_path, index=False)
+        # Save the updated stock with all dates to the file.
+        df_monetized_stock.to_excel(monetized_stock_path, index=False)
 
      # Convert the DataFrame as a Parquet file
     parquet_path = monetized_stock_path.with_suffix('.parquet')
+    df_monetized_stock['model'] = df_monetized_stock['model'].astype(str)
     df_monetized_stock.to_parquet(parquet_path, index=False, engine='pyarrow')
                 
     logging.info(f"Monetized stock has been successfully updated for date {date}.")

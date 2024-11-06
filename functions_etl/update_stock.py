@@ -44,39 +44,65 @@ def update_stock(stock_file: str, compras_file: str, ventas_file: str, date: Uni
     df_ventas = pd.read_excel(ventas_path, engine='openpyxl')
     
     # Convert date columns to datetime format
-    df_stock.columns = pd.to_datetime(df_stock.columns, format='%Y-%m-%d', errors='ignore', dayfirst=True)
-    df_compras.columns = pd.to_datetime(df_compras.columns, format='%Y-%m-%d', errors='ignore', dayfirst=True)
-    df_ventas.columns = pd.to_datetime(df_ventas.columns, format='%Y-%m-%d', errors='ignore', dayfirst=True)
-    
+    try:
+        df_stock['date'] = pd.to_datetime(df_stock['date'], format='%Y-%m-%d', errors='coerce')
+        df_compras['date'] = pd.to_datetime(df_compras['date'], format='%Y-%m-%d', errors='coerce')
+        df_ventas['date'] = pd.to_datetime(df_ventas['date'], format='%Y-%m-%d', errors='coerce')
+        date = pd.to_datetime(date, format='%Y-%m-%d')
+        logging.info("Dates converted successfully.")
+    except Exception as e:
+        logging.error(f"Error converting dates: {e}")
+        return
+
+    # Check if a record already exists for the specified date
+    if not df_stock[df_stock['date'] == date].empty:
+        print(f"A record already exists for {date}. No update was performed.")
+        return
+
+    # Filter rows for the specified date in purchases and sales
+    compras_dia = df_compras[df_compras['date'] == date]
+    ventas_dia = df_ventas[df_ventas['date'] == date]
+
     # Convert input date to datetime format
     date = pd.to_datetime(date, format='%Y-%m-%d')
     
-    # If the date doesn't exist in the stock DataFrame, add a new column for it
-    if date not in df_stock.columns:
-        last_date = df_stock.columns[-1]
-        df_stock[date] = df_stock[last_date]
-        logging.info(f"Column for date {date} added with values from the last recorded stock.")
-    
-    # Ensure that the date exists in both the purchases and sales DataFrames
-    if date not in df_compras.columns or date not in df_ventas.columns:
-        logging.error(f"Date {date} not found in purchases or sales files.")
+
+     # Create a DataFrame with the stock values from the previous day
+    stock_day_before = df_stock[df_stock['date'] == (date - pd.Timedelta(days=1))]
+    if stock_day_before.empty:
+        logging.error("Previous day's stock not found. Please verify the data.")
         return
+    else:
+        logging.info("Previous day's stock loaded successfully.")
+
+     # Create a new stock record for the current date
+    logging.info(f"Creating new stock record for {date}.")
+    df_stock_day = stock_day_before.copy()
+    df_stock_day['date'] = date
     
+    # Update stock by adding purchases and subtracting sales.
+    df_stock_day.set_index('id_product', inplace=True)
+    compras_dia.set_index('id_product', inplace=True)
+    ventas_dia.set_index('id_product', inplace=True)
+
+     # Apply stock update operations
+    df_stock_day['Quantity'] += compras_dia['Quantity'].fillna(0) - ventas_dia['Quantity'].fillna(0) 
+  
+     # Reset index and append the new record
+    df_stock_day.reset_index(inplace=True)
+    df_stock = pd.concat([df_stock, df_stock_day], ignore_index=True)
+    logging.info(f"New stock record created for {date}.")
+
     # Get the day before the specified date
     yesterday = date - pd.Timedelta(days=1)
     
-    # Check if the previous day exists in the stock file
-    if yesterday in df_stock.columns:
-        # Update stock: stock from the previous day + units purchased - units sold
-        df_stock[date] = df_stock[yesterday] + df_compras[date] - df_ventas[date]
-        logging.info(f"Stock updated for date {date}.")
-    else:
-        logging.error(f"The previous date ({yesterday}) does not exist in the stock file.")
-        return
-    
+     
     # Save the updated stock file
-    df_stock.to_excel(stock_path, index=False)
-    logging.info(f"Stock file updated for date {date} and saved to {stock_path}.")
+    try :
+        df_stock.to_excel(stock_path, index=False)
+        logging.info(f"Stock file updated for date {date} and saved to {stock_path}.")
+    except Exception as e:
+        logging.error(f"Error saving stock file: {e}")
                  
 
 
